@@ -89,7 +89,9 @@ Format JSON attendu :
   "type": "stage ou alternance (choisir un des deux)",
   "location": "Ville ou localisation",
   "duration": "Durée du contrat (ex: 6 mois)",
-  "salary": "Salaire ou gratification si mentionné, sinon null"
+  "salary": "Salaire ou gratification si mentionné, sinon null",
+  "startDate": "Date de début souhaitée au format JJ/MM/AAAA si mentionnée, sinon null",
+  "endDate": "Date de fin souhaitée au format JJ/MM/AAAA si mentionnée, sinon null"
 }
 
 Texte de l'offre :
