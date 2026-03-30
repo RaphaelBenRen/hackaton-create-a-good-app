@@ -102,13 +102,14 @@ const StudentDetailScreen = ({ route }) => {
     setInviting(true);
 
     try {
-      await applicationsAPI.create({
+      const payload = {
         offer_id: offerId,
-        student_id: student.user_id,
+        student_id: student.user_id || student.id,
         company_id: profile.id,
         status: 'pending',
         cover_letter: t('inviteStudent'),
-      });
+      };
+      await applicationsAPI.create(payload);
       Alert.alert(t('success'), t('applicationSent'));
       setInvited(true);
     } catch (err) {
@@ -379,6 +380,7 @@ const StudentDetailScreen = ({ route }) => {
             <FlatList
               data={companyOffers}
               keyExtractor={(item) => item.id}
+              keyboardShouldPersistTaps="handled"
               renderItem={({ item }) => (
                 <TouchableOpacity
                   style={[styles.offerItem, { backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(120,120,120,0.05)', borderColor: colors.glassBorder }]}
@@ -386,19 +388,19 @@ const StudentDetailScreen = ({ route }) => {
                   accessibilityRole="button"
                   accessibilityLabel={item.title}
                 >
-                  <Feather name="briefcase" size={18} color={colors.accent} />
-                  <View style={{ flex: 1, marginLeft: 12 }}>
-                    <Text style={[styles.offerItemTitle, { fontSize: scaledSize(15), color: colors.text }]}>
+                  <View style={{ flex: 1, marginRight: 12 }}>
+                    <Text style={[styles.offerItemTitle, { fontSize: scaledSize(15), color: colors.text }]} numberOfLines={1}>
                       {item.title}
                     </Text>
                     <Text style={[styles.offerItemType, { fontSize: scaledSize(12), color: colors.textSecondary }]}>
                       {item.type === 'stage' ? t('stage') : t('alternance')}
                     </Text>
                   </View>
-                  <Feather name="chevron-right" size={18} color={colors.textTertiary} />
+                  <Feather name="chevron-right" size={18} color={colors.accent} />
                 </TouchableOpacity>
               )}
               style={{ maxHeight: 300 }}
+              contentContainerStyle={{ paddingBottom: 10 }}
             />
             <TouchableOpacity
               style={styles.modalCancel}

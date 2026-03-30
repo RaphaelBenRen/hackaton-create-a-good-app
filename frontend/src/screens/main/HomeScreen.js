@@ -166,10 +166,10 @@ const HomeScreen = () => {
       </TouchableOpacity>
       <View style={styles.actionBar}>
         <TouchableOpacity style={styles.actionBtn} onPress={() => navigation.navigate('OfferDetail', { offer: item })} accessibilityLabel={t('viewDetails')}>
-          <Text style={[styles.actionBtnText, { fontSize: scaledSize(13) }]}>{t('viewDetails')}</Text>
+          <Text style={[styles.actionBtnText, { fontSize: scaledSize(13), color: colors.text }]}>{t('viewDetails')}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.actionBtn, styles.actionBtnPrimary]} onPress={() => navigation.navigate('OfferDetail', { offer: item })} accessibilityLabel={t('apply')}>
-          <Text style={[styles.actionBtnText, { fontSize: scaledSize(13) }]}>{t('apply')}</Text>
+          <Text style={[styles.actionBtnText, { fontSize: scaledSize(13), color: '#fff' }]}>{t('apply')}</Text>
         </TouchableOpacity>
       </View>
     </GlassCard>
@@ -197,7 +197,7 @@ const HomeScreen = () => {
             <Text style={[styles.cardTitle, { fontSize: scaledSize(16), color: colors.text }]} numberOfLines={1}>
               {item.first_name} {item.last_name}
             </Text>
-            <Text style={[styles.cardSub, { fontSize: scaledSize(13) }]} numberOfLines={1}>
+            <Text style={[styles.cardSub, { fontSize: scaledSize(13), color: colors.textSecondary }]} numberOfLines={1}>
               {item.study_field}{item.city ? ` · ${item.city}` : ''}
             </Text>
             <View style={styles.statusRow}>
@@ -226,10 +226,10 @@ const HomeScreen = () => {
         </TouchableOpacity>
         <View style={styles.actionBar}>
           <TouchableOpacity style={styles.actionBtn} onPress={() => navigation.navigate('StudentDetail', { student: item })} accessibilityLabel={t('viewDetails')}>
-            <Text style={[styles.actionBtnText, { fontSize: scaledSize(13) }]}>{t('viewDetails')}</Text>
+            <Text style={[styles.actionBtnText, { fontSize: scaledSize(13), color: colors.text }]}>{t('viewDetails')}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.actionBtn, styles.actionBtnPrimary]} onPress={() => navigation.navigate('StudentDetail', { student: item })} accessibilityLabel={t('invite')}>
-            <Text style={[styles.actionBtnText, { fontSize: scaledSize(13) }]}>{t('invite')}</Text>
+            <Text style={[styles.actionBtnText, { fontSize: scaledSize(13), color: '#fff' }]}>{t('invite')}</Text>
           </TouchableOpacity>
         </View>
       </GlassCard>
@@ -262,7 +262,7 @@ const HomeScreen = () => {
               </Text>
             </View>
           </View>
-          <Text style={[styles.infoLine, { fontSize: scaledSize(12) }]}>
+          <Text style={[styles.infoLine, { fontSize: scaledSize(12), color: colors.textSecondary }]}>
             {item.location || ''}{item.duration ? ` · ${item.duration}` : ''}
           </Text>
         </View>
@@ -403,7 +403,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(120,120,120,0.05)', borderWidth: 1, borderColor: COLORS.glassBorder,
     minHeight: 44,
   },
-  tabActive: { backgroundColor: COLORS.primary, borderColor: COLORS.accent },
+  tabActive: { backgroundColor: COLORS.accent, borderColor: COLORS.accent },
   tabText: { fontWeight: '500' },
   tabTextActive: { color: '#fff', fontWeight: '700' },
 

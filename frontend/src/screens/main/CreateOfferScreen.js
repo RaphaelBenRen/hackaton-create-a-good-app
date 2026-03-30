@@ -224,10 +224,10 @@ const CreateOfferScreen = () => {
                     <TouchableOpacity onPress={() => setModalVisible(false)}><Feather name="x" size={24} color={colors.error} /></TouchableOpacity>
                  </View>
 
-                 <Text style={{ color: 'rgba(255,255,255,0.7)', fontSize: 13, marginBottom: 10 }}>Sélectionnez dans la liste ou tapez pour ajouter 👇</Text>
+                 <Text style={{ color: colors.textSecondary, fontSize: 13, marginBottom: 10 }}>Sélectionnez dans la liste ou tapez pour ajouter 👇</Text>
                  
                  <TextInput 
-                   style={[styles.input, { marginBottom: 15, borderColor: colors.accent, borderWidth: 2, color: colors.text }]} 
+                   style={[styles.input, { marginBottom: 15, borderColor: colors.accent, borderWidth: 2, color: colors.text, backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)' }]} 
                    placeholder="Rechercher..." 
                    placeholderTextColor={colors.textTertiary}
                    value={search}
@@ -280,7 +280,7 @@ const CreateOfferScreen = () => {
       <View style={{ marginBottom: 15 }}>
         <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 0 }]}>{label}</Text>
         <TouchableOpacity 
-          style={[styles.input, { justifyContent: 'center' }]} 
+          style={[styles.input, { justifyContent: 'center', borderColor: colors.glassBorder, backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(120,120,120,0.05)' }]} 
           onPress={() => { setModalVisible(true); setSearch(''); }}
         >
           <Text style={{ color: value ? colors.text : colors.textTertiary, fontSize: scaledSize(16) }}>

@@ -19,7 +19,7 @@ import { applicationsAPI, storageAPI } from '../../services/api';
 
 const OfferDetailScreen = ({ route }) => {
   const { offer } = route.params;
-  const { t, scaledSize, session, userRole, profile, language, colors } = useApp();
+  const { t, scaledSize, session, userRole, profile, language, colors, isDarkMode } = useApp();
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
 
