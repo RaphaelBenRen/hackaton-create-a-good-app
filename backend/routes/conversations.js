@@ -15,33 +15,54 @@ router.get('/', authenticate, async (req, res) => {
   // Enrich with other party info
   const enriched = await Promise.all(
     (data || []).map(async (conv) => {
-      const isStudent = conv.student_id === userId;
-      const otherUserId = isStudent ? conv.company_id : conv.student_id;
-      let otherName = '', otherInitials = '';
+      try {
+        const isStudent = conv.student_id === userId;
+        const otherUserId = isStudent ? conv.company_id : conv.student_id;
+        let otherName = '', otherInitials = '';
 
-      if (isStudent) {
-        const { data: company } = await supabase
-          .from('companies').select('company_name').eq('user_id', otherUserId).single();
-        otherName = company?.company_name || 'Entreprise';
-        otherInitials = otherName.substring(0, 2).toUpperCase();
-      } else {
-        const { data: student } = await supabase
-          .from('students').select('first_name, last_name').eq('user_id', otherUserId).single();
-        otherName = student ? `${student.first_name} ${student.last_name}` : 'Étudiant·e';
-        otherInitials = student ? `${student.first_name[0]}${student.last_name[0]}`.toUpperCase() : 'ET';
+        if (isStudent) {
+          const { data: company, error } = await supabase
+            .from('companies').select('company_name').eq('user_id', otherUserId).single();
+          if (error || !company) {
+            otherName = 'Entreprise';
+          } else {
+            otherName = company.company_name || 'Entreprise';
+          }
+          otherInitials = otherName.substring(0, 2).toUpperCase();
+        } else {
+          const { data: student, error } = await supabase
+            .from('students').select('first_name, last_name').eq('user_id', otherUserId).single();
+          if (error || !student) {
+            otherName = 'Étudiant·e';
+            otherInitials = 'ET';
+          } else {
+            otherName = `${student.first_name} ${student.last_name}`;
+            otherInitials = `${student.first_name[0]}${student.last_name[0]}`.toUpperCase();
+          }
+        }
+
+        const lastMsg = conv.messages?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0];
+
+        return {
+          ...conv,
+          otherName,
+          otherInitials,
+          otherUserId,
+          lastMessage: lastMsg?.content || '',
+          lastMessageTime: lastMsg?.created_at || conv.created_at,
+          isOwnLastMessage: lastMsg?.sender_id === userId,
+        };
+      } catch (err) {
+        return {
+          ...conv,
+          otherName: 'Inconnu',
+          otherInitials: '??',
+          otherUserId: null,
+          lastMessage: '',
+          lastMessageTime: conv.created_at,
+          isOwnLastMessage: false,
+        };
       }
-
-      const lastMsg = conv.messages?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0];
-
-      return {
-        ...conv,
-        otherName,
-        otherInitials,
-        otherUserId,
-        lastMessage: lastMsg?.content || '',
-        lastMessageTime: lastMsg?.created_at || conv.created_at,
-        isOwnLastMessage: lastMsg?.sender_id === userId,
-      };
     })
   );
 

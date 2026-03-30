@@ -9,7 +9,10 @@ const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 5 *
 router.post('/cv', authenticate, upload.single('file'), async (req, res) => {
   if (!req.file) return res.status(400).json({ error: 'Aucun fichier' });
 
-  const ext = req.file.originalname.split('.').pop();
+  const ext = req.file.originalname.split('.').pop().toLowerCase();
+  if (ext !== 'pdf' || req.file.mimetype !== 'application/pdf') {
+    return res.status(400).json({ error: 'Only PDF files are allowed for CVs' });
+  }
   const path = `${req.user.id}/cv.${ext}`;
 
   const { error: uploadError } = await supabase.storage
