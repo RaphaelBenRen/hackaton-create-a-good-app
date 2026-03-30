@@ -25,3 +25,39 @@ COMMENT ON COLUMN public.students.qualities IS 'Qualités et soft skills extrait
 ALTER TABLE public.offers
 ADD COLUMN IF NOT EXISTS pdf_url VARCHAR(255);
 COMMENT ON COLUMN public.offers.pdf_url IS 'Lien vers le PDF original de l''offre importé par l''entreprise';
+
+-- Résolution de l'erreur "could not find a relationship" entre applications et students
+ALTER TABLE public.applications
+  DROP CONSTRAINT IF EXISTS applications_student_id_fkey,
+  ADD CONSTRAINT applications_student_id_fkey FOREIGN KEY (student_id) REFERENCES public.students(user_id) ON DELETE CASCADE;
+
+-- Ajout de la table de référence pour les rémunérations
+CREATE TABLE IF NOT EXISTS public.reference_salaries (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    name VARCHAR(255) UNIQUE NOT NULL,
+    is_top BOOLEAN DEFAULT false
+);
+
+INSERT INTO public.reference_salaries (name, is_top) VALUES 
+('Non rémunéré', true),
+('Gratification légale (~600€)', true),
+('800€ - 1000€', true),
+('1000€ - 1200€', true),
+('1200€ - 1500€', false),
+('1500€ - 2000€', false),
+('+ 2000€', false)
+ON CONFLICT (name) DO NOTHING;
+
+-- Ajout de la table de référence pour les compétences (skills)
+CREATE TABLE IF NOT EXISTS public.reference_skills (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    name VARCHAR(255) UNIQUE NOT NULL,
+    is_top BOOLEAN DEFAULT false
+);
+
+INSERT INTO public.reference_skills (name, is_top) VALUES 
+('React', true), ('Node.js', true), ('Python', true), ('Java', true), 
+('Excel', true), ('PowerPoint', true), ('Photoshop', true), ('Figma', true), 
+('SEO', true), ('Management', true), ('Communication', true), ('Marketing', true),
+('Vente', true), ('Design UI/UX', true), ('TypeScript', true), ('SQL', false), ('Git', false)
+ON CONFLICT (name) DO NOTHING;
