@@ -361,7 +361,7 @@ const OfferDetailScreen = ({ route }) => {
                 </Text>
               </TouchableOpacity>
 
-              <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 16 }]}>
+              <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 16, color: colors.text }]}>
                 {t('resume') || 'CV'} * (Obligatoire)
               </Text>
               <TouchableOpacity

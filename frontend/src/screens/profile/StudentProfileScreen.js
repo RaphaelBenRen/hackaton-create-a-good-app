@@ -217,12 +217,12 @@ const StudentProfileScreen = ({ route, navigation }) => {
 
     return (
       <View style={{ marginBottom: 15 }}>
-        <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 0 }]}>{label}</Text>
+        <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 0, color: colors.text }]}>{label}</Text>
         <TouchableOpacity 
           style={[styles.input, { justifyContent: 'center' }]} 
           onPress={() => { setModalVisible(true); setSearch(''); }}
         >
-          <Text style={{ color: value ? (isDarkMode ? '#fff' : colors.text) : colors.textTertiary, fontSize: scaledSize(16) }}>
+          <Text style={{ color: value ? colors.text : colors.textTertiary, fontSize: scaledSize(16) }}>
             {value || placeholder}
           </Text>
         </TouchableOpacity>
@@ -303,13 +303,13 @@ const StudentProfileScreen = ({ route, navigation }) => {
               <Feather name="user" size={16} color={colors.text} />
               <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>Identité</Text>
             </View>
-            <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 0 }]}>{t('firstName')} *</Text>
+            <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 0, color: colors.text }]}>{t('firstName')} *</Text>
             <TextInput style={[styles.input, { fontSize: scaledSize(16), color: colors.text }]} value={firstName} onChangeText={setFirstName} />
-            <Text style={[styles.label, { fontSize: scaledSize(14) }]}>{t('lastName')} *</Text>
+            <Text style={[styles.label, { fontSize: scaledSize(14), color: colors.text }]}>{t('lastName')} *</Text>
             <TextInput style={[styles.input, { fontSize: scaledSize(16), color: colors.text }]} value={lastName} onChangeText={setLastName} />
-            <Text style={[styles.label, { fontSize: scaledSize(14) }]}>{t('phone')}</Text>
+            <Text style={[styles.label, { fontSize: scaledSize(14), color: colors.text }]}>{t('phone')}</Text>
             <TextInput style={[styles.input, { fontSize: scaledSize(16), color: colors.text }]} value={phone} onChangeText={setPhone} keyboardType="phone-pad" />
-            <Text style={[styles.label, { fontSize: scaledSize(14) }]}>{t('bio')}</Text>
+            <Text style={[styles.label, { fontSize: scaledSize(14), color: colors.text }]}>{t('bio')}</Text>
             <TextInput style={[styles.input, styles.multiline, { fontSize: scaledSize(16), color: colors.text }]} value={bio} onChangeText={setBio} multiline />
           </GlassCard>
 
@@ -362,7 +362,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
               <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>Compétences & Soft Skills</Text>
             </View>
             
-            <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 0 }]}>Vos Compétences Techniques</Text>
+            <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 0, color: colors.text }]}>Vos Compétences Techniques</Text>
             {skills.map((s, index) => (
               <View key={`skill-${index}`} style={[styles.dynamicBox, { padding: 4, paddingLeft: 10, flexDirection: 'row', alignItems: 'center' }]}>
                 <TextInput style={[styles.dynamicInput, { flex: 1, marginBottom: 0, color: colors.text }]} value={s} onChangeText={v => upArray(skills, setSkills, index, v)} placeholder="Ex: React JS, Python..." placeholderTextColor={colors.textTertiary} />
@@ -374,7 +374,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
               <Text style={[styles.addBtnText, { color: colors.success }]}>Ajouter une compétence</Text>
             </TouchableOpacity>
 
-            <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 24 }]}>Vos Qualités</Text>
+            <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 24, color: colors.text }]}>Vos Qualités</Text>
             {qualities.map((q, index) => (
               <View key={`qual-${index}`} style={[styles.dynamicBox, { padding: 4, paddingLeft: 10, flexDirection: 'row', alignItems: 'center' }]}>
                 <TextInput style={[styles.dynamicInput, { flex: 1, marginBottom: 0, color: colors.text }]} value={q} onChangeText={v => upArray(qualities, setQualities, index, v)} placeholder="Ex: Travail en équipe, Rigoureux..." placeholderTextColor={colors.textTertiary} />
@@ -464,9 +464,9 @@ const StudentProfileScreen = ({ route, navigation }) => {
               <Feather name="search" size={16} color={colors.text} />
               <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>Préférences de recherche</Text>
             </View>
-            <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 0 }]}>{t('searchStatus')}</Text>
+            <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 0, color: colors.text }]}>{t('searchStatus')}</Text>
             {renderChips(searchStatuses, searchStatus, setSearchStatus)}
-            <Text style={[styles.label, { fontSize: scaledSize(14) }]}>{t('searchType')}</Text>
+            <Text style={[styles.label, { fontSize: scaledSize(14), color: colors.text }]}>{t('searchType')}</Text>
             {renderChips(searchTypes, searchType, setSearchType)}
           </GlassCard>
 
@@ -485,7 +485,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
                data={citiesList}
              />
 
-             <Text style={[styles.label, { fontSize: scaledSize(14) }]}>{t('mobilityRadius')} (en km)</Text>
+             <Text style={[styles.label, { fontSize: scaledSize(14), color: colors.text }]}>{t('mobilityRadius')} (en km)</Text>
              <TextInput style={[styles.input, { fontSize: scaledSize(16), width: 120, color: colors.text }]} value={mobilityRadius} onChangeText={setMobilityRadius} keyboardType="numeric" />
           </GlassCard>
 

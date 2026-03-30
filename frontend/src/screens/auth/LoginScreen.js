@@ -50,7 +50,7 @@ const LoginScreen = ({ navigation }) => {
 
           <Animated.View style={{opacity: 1}}>
             <GlassCard intensity={30} style={{ padding: 30 }}>
-              <Text style={[styles.label, { fontSize: scaledSize(14) }]}>{t('email')}</Text>
+              <Text style={[styles.label, { fontSize: scaledSize(14), color: colors.text }]}>{t('email')}</Text>
               <TextInput
                 style={[styles.input, { fontSize: scaledSize(16) }]}
                 placeholder={t('email')}
@@ -64,7 +64,7 @@ const LoginScreen = ({ navigation }) => {
                 accessibilityLabel={t('email')}
               />
 
-              <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 16 }]}>
+              <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 16, color: colors.text }]}>
                 {t('password')}
               </Text>
               <View style={styles.passwordContainer}>

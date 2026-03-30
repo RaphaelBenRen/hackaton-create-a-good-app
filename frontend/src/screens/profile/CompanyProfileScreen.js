@@ -110,12 +110,12 @@ const CompanyProfileScreen = () => {
 
     return (
       <View style={{ marginBottom: 15 }}>
-        <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 0 }]}>{label}</Text>
+        <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 0, color: colors.text }]}>{label}</Text>
         <TouchableOpacity 
           style={[styles.input, { justifyContent: 'center' }]} 
           onPress={() => { setModalVisible(true); setSearch(''); }}
         >
-          <Text style={{ color: value ? (isDarkMode ? '#fff' : colors.text) : colors.textTertiary, fontSize: scaledSize(16) }}>
+          <Text style={{ color: value ? colors.text : colors.textTertiary, fontSize: scaledSize(16) }}>
             {value || placeholder}
           </Text>
         </TouchableOpacity>
@@ -192,7 +192,7 @@ const CompanyProfileScreen = () => {
               </Text>
             </View>
 
-            <Text style={[styles.label, { fontSize: scaledSize(14) }]}>{t('companyName')} *</Text>
+            <Text style={[styles.label, { fontSize: scaledSize(14), color: colors.text }]}>{t('companyName')} *</Text>
             <TextInput
               style={[styles.input, { fontSize: scaledSize(16), color: colors.text }]}
               placeholder={t('companyName')}
@@ -212,7 +212,7 @@ const CompanyProfileScreen = () => {
               topData={topSectors}
             />
 
-            <Text style={[styles.label, { fontSize: scaledSize(14) }]}>{t('companySize')}</Text>
+            <Text style={[styles.label, { fontSize: scaledSize(14), color: colors.text }]}>{t('companySize')}</Text>
             {renderChips(sizes, companySize, setCompanySize)}
           </GlassCard>
 
@@ -225,7 +225,7 @@ const CompanyProfileScreen = () => {
               </Text>
             </View>
 
-            <Text style={[styles.label, { fontSize: scaledSize(14) }]}>{t('description')}</Text>
+            <Text style={[styles.label, { fontSize: scaledSize(14), color: colors.text }]}>{t('description')}</Text>
             <TextInput
               style={[styles.input, styles.multiline, { fontSize: scaledSize(16), color: colors.text }]}
               placeholder={t('descriptionPlaceholder')}
@@ -246,7 +246,7 @@ const CompanyProfileScreen = () => {
               data={citiesList}
             />
 
-            <Text style={[styles.label, { fontSize: scaledSize(14) }]}>{t('website')}</Text>
+            <Text style={[styles.label, { fontSize: scaledSize(14), color: colors.text }]}>{t('website')}</Text>
             <TextInput
               style={[styles.input, { fontSize: scaledSize(16), color: colors.text }]}
               placeholder="https://www.exemple.com"
@@ -269,7 +269,7 @@ const CompanyProfileScreen = () => {
               </Text>
             </View>
 
-            <Text style={[styles.label, { fontSize: scaledSize(14) }]}>{t('contactEmail')}</Text>
+            <Text style={[styles.label, { fontSize: scaledSize(14), color: colors.text }]}>{t('contactEmail')}</Text>
             <TextInput
               style={[styles.input, { fontSize: scaledSize(16), color: colors.text }]}
               placeholder="contact@entreprise.com"
@@ -282,7 +282,7 @@ const CompanyProfileScreen = () => {
               accessibilityLabel={t('contactEmail')}
             />
 
-            <Text style={[styles.label, { fontSize: scaledSize(14) }]}>{t('contactPhone')}</Text>
+            <Text style={[styles.label, { fontSize: scaledSize(14), color: colors.text }]}>{t('contactPhone')}</Text>
             <TextInput
               style={[styles.input, { fontSize: scaledSize(16), color: colors.text }]}
               placeholder="01 23 45 67 89"

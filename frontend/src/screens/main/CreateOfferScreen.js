@@ -278,7 +278,7 @@ const CreateOfferScreen = () => {
 
     return (
       <View style={{ marginBottom: 15 }}>
-        <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 0 }]}>{label}</Text>
+        <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 0, color: colors.text }]}>{label}</Text>
         <TouchableOpacity 
           style={[styles.input, { justifyContent: 'center', borderColor: colors.glassBorder, backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(120,120,120,0.05)' }]} 
           onPress={() => { setModalVisible(true); setSearch(''); }}

@@ -168,7 +168,7 @@ const OnboardingScreen = ({ onDone }) => {
               accessibilityLabel={isEn ? 'Skip onboarding' : "Passer l'introduction"}
               accessibilityRole="button"
             >
-              <Text style={styles.skipText}>{isEn ? 'Skip' : 'Passer'}</Text>
+              <Text style={[styles.skipText, { color: isDarkMode ? 'rgba(255,255,255,0.6)' : colors.textSecondary }]}>{isEn ? 'Skip' : 'Passer'}</Text>
             </TouchableOpacity>
           )}
 
@@ -179,7 +179,7 @@ const OnboardingScreen = ({ onDone }) => {
             accessibilityRole="button"
             accessibilityHint={lastSlide ? (isEn ? 'Opens the app' : "Ouvre l'application") : (isEn ? 'Goes to next slide' : 'Passe au slide suivant')}
           >
-            <Text style={styles.nextBtnText}>
+            <Text style={[styles.nextBtnText, { color: '#fff' }]}>
               {lastSlide ? (isEn ? '🚀 Commencer' : '🚀 Commencer') : (isEn ? 'Next →' : 'Suivant →')}
             </Text>
           </TouchableOpacity>
