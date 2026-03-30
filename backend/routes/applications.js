@@ -5,14 +5,58 @@ const authenticate = require('../middleware/auth');
 // POST /api/applications
 router.post('/', authenticate, async (req, res) => {
   if (!req.body.offer_id) return res.status(400).json({ error: 'offer_id is required' });
-  if (req.body.student_id && req.body.student_id !== req.user.id) return res.status(403).json({ error: 'Cannot apply on behalf of another student' });
+  // Fix: allow companies to invite students (bypass student_id restriction)
+  let finalStudentId = req.user.id;
+  if (req.body.student_id && req.body.student_id !== req.user.id) {
+    const { data: company } = await supabase.from('companies').select('id').eq('user_id', req.user.id).single();
+    if (!company) {
+      return res.status(403).json({ error: 'Cannot apply on behalf of another student' });
+    }
+    finalStudentId = req.body.student_id;
+    // Set type to 'invite' if not provided and it's a company inviting
+    if (!req.body.type) req.body.type = 'invite';
+  } else {
+    // Student applying
+    if (!req.body.type) req.body.type = 'apply';
+  }
 
   const { data, error } = await supabase
     .from('applications')
-    .insert({ ...req.body, student_id: req.user.id })
+    .insert({ ...req.body, student_id: finalStudentId })
     .select()
     .single();
+
   if (error) return res.status(400).json({ error: error.message });
+
+  // If it's an invitation (company to student), send an automated message
+  if (finalStudentId !== req.user.id) {
+    try {
+      // 1. Create or get conversation
+      const { data: conv } = await supabase
+        .from('conversations')
+        .upsert(
+          { student_id: finalStudentId, company_id: req.user.id, offer_id: req.body.offer_id },
+          { onConflict: 'student_id,company_id,offer_id' }
+        )
+        .select()
+        .single();
+      
+      if (conv) {
+        // 2. Send automated message
+        await supabase.from('messages').insert({
+          sender_id: req.user.id,
+          receiver_id: finalStudentId,
+          conversation_id: conv.id,
+          application_id: data.id,
+          content: "Bonjour ! Nous avons consulté votre profil et nous aimerions vous inviter à postuler pour notre offre.",
+        });
+      }
+    } catch (msgErr) {
+      console.error('Failed to send invitation message:', msgErr);
+      // We don't fail the application creation just because the message failed
+    }
+  }
+
   res.json(data);
 });
 
@@ -37,6 +81,7 @@ router.get('/company', authenticate, async (req, res) => {
     .from('applications')
     .select('*, offers(*), students(*)')
     .eq('company_id', company.id)
+    .eq('type', 'apply') // Filter to only show received applications
     .order('created_at', { ascending: false });
   if (error) return res.status(400).json({ error: error.message });
   res.json(data);

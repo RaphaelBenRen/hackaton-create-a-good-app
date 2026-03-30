@@ -153,7 +153,7 @@ const ApplicationsScreen = () => {
           <View style={styles.cardInfo}>
             {/* offer title */}
             <Text style={[styles.cardTitle, { fontSize: scaledSize(16), color: colors.text }]} numberOfLines={1}>
-              {item.offers?.title || ''}
+              {item.type === 'invite' && userRole === 'student' ? `${t('invitation')} : ${item.offers?.title || ''}` : item.offers?.title || ''}
             </Text>
 
             {/* company or student name */}
@@ -247,17 +247,45 @@ const ApplicationsScreen = () => {
 
     // Student: pending -> Withdraw
     if (userRole === 'student' && item.status === 'pending') {
+      if (item.type === 'invite') {
+        return (
+          <View style={styles.actionBar}>
+            <TouchableOpacity
+              style={[styles.actionBtn, { backgroundColor: `${COLORS.success}20`, minHeight: 44 }]}
+              onPress={() => handleAccept(item)}
+              accessibilityRole="button"
+              accessibilityLabel={t('accept')}
+            >
+              <Feather name="check" size={16} color={COLORS.success} style={{ marginRight: 6 }} />
+              <Text style={[styles.actionBtnText, { color: COLORS.success, fontSize: scaledSize(14) }]}>
+                {t('acceptApplication') || t('accept')}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.actionBtn, { backgroundColor: `${COLORS.error}20`, minHeight: 44 }]}
+              onPress={() => handleReject(item)}
+              accessibilityRole="button"
+              accessibilityLabel={t('reject')}
+            >
+              <Feather name="x" size={16} color={COLORS.error} style={{ marginRight: 6 }} />
+              <Text style={[styles.actionBtnText, { color: COLORS.error, fontSize: scaledSize(14) }]}>
+                {t('rejectApplication') || t('reject')}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        );
+      }
       return (
         <View style={styles.actionBar}>
           <TouchableOpacity
-            style={[styles.actionBtn, { backgroundColor: `${COLORS.error}15`, minHeight: 44 }]}
+            style={[styles.actionBtn, { backgroundColor: `${COLORS.error}20`, flex: 1, minHeight: 44 }]}
             onPress={() => handleWithdraw(item)}
             accessibilityRole="button"
-            accessibilityLabel={t('withdraw')}
+            accessibilityLabel={t('withdrawApplication')}
           >
             <Feather name="trash-2" size={16} color={COLORS.error} style={{ marginRight: 6 }} />
             <Text style={[styles.actionBtnText, { color: COLORS.error, fontSize: scaledSize(14) }]}>
-              {t('withdraw') || 'Retirer'}
+              {t('withdrawApplication') || 'Retirer'}
             </Text>
           </TouchableOpacity>
         </View>

@@ -107,10 +107,11 @@ const StudentDetailScreen = ({ route }) => {
         student_id: student.user_id || student.id,
         company_id: profile.id,
         status: 'pending',
+        type: 'invite', // Explicitly set type to invite
         cover_letter: t('inviteStudent'),
       };
       await applicationsAPI.create(payload);
-      Alert.alert(t('success'), t('applicationSent'));
+      Alert.alert(t('success'), t('invitationSent') || 'Invitation envoyée !');
       setInvited(true);
     } catch (err) {
       if (err.message?.includes('23505') || err.message?.includes('duplicate')) {

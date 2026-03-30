@@ -147,6 +147,8 @@ const translations = {
     coverLetterPlaceholder: 'Expliquez pourquoi ce poste vous intéresse...',
     sendApplication: 'Envoyer ma candidature',
     applicationSent: 'Candidature envoyée !',
+    invitationSent: 'Invitation envoyée !',
+    invitation: 'Invitation',
 
     // Student detail (for companies)
     studentDetails: "Profil de l'étudiant·e",
@@ -367,6 +369,8 @@ const translations = {
     coverLetterPlaceholder: 'Explain why this position interests you...',
     sendApplication: 'Send my application',
     applicationSent: 'Application sent!',
+    invitationSent: 'Invitation sent!',
+    invitation: 'Invitation',
 
     // Student detail (for companies)
     studentDetails: 'Student profile',

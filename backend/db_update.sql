@@ -61,3 +61,7 @@ INSERT INTO public.reference_skills (name, is_top) VALUES
 ('SEO', true), ('Management', true), ('Communication', true), ('Marketing', true),
 ('Vente', true), ('Design UI/UX', true), ('TypeScript', true), ('SQL', false), ('Git', false)
 ON CONFLICT (name) DO NOTHING;
+-- Ajout du type de candidature (postulation ou invitation)
+ALTER TABLE public.applications 
+ADD COLUMN IF NOT EXISTS type TEXT CHECK (type IN ('apply', 'invite')) DEFAULT 'apply';
+COMMENT ON COLUMN public.applications.type IS 'Indique si c''est l''étudiant qui a postulé (apply) ou l''entreprise qui a invité (invite)';
