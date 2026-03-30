@@ -1,0 +1,27 @@
+FICHE DE POSTE / OFFRE DE STAGE
+
+Titre du poste : Développeur Web Full-Stack (H/F)
+Type de contrat : stage
+Lieu : Paris
+Durée du contrat : 6 mois
+Date de début : 01/09/2024
+Date de fin : 28/02/2025
+Gratification : 1200€ / mois
+
+Description de l'entreprise et des missions :
+Rejoignez une startup innovante en pleine croissance ! Nous recherchons un développeur passionné pour intégrer notre pôle technique. Vous participerez activement au développement de nos nouvelles fonctionnalités produit, à l'amélioration des performances globales de la plateforme et à la refonte de notre tableau de bord utilisateur. 
+
+Vos Missions :
+- Conception et développement d'interfaces web dynamiques UI/UX.
+- Création d'APIs backend de données.
+- Écriture de tests, de documentation et intégration continue.
+
+Compétences Requises :
+- React JS
+- Node.js
+- SQL
+- TypeScript
+- Management de projet
+
+Profil Recherché :
+Que vous soyez étudiant(e) en école d'ingénieur ou d'informatique, si vous êtes curieux(se), autonome, et doté(e) d'un excellent esprit d'équipe, ce poste est pensé pour vous !
