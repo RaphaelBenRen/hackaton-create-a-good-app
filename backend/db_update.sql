@@ -14,9 +14,8 @@ ADD COLUMN IF NOT EXISTS qualities TEXT[] DEFAULT '{}';
 -- Ajout des nouvelles colonnes à la table applications
 ALTER TABLE public.applications
 ADD COLUMN IF NOT EXISTS cover_letter TEXT,
-ADD COLUMN IF NOT EXISTS cv_url VARCHAR(255);
-
--- (Optionnel) Commentaire sur les colonnes
+ADD COLUMN IF NOT EXISTS cv_url VARCHAR(255),
+ADD COLUMN IF NOT EXISTS cover_letter_url VARCHAR(255);
 COMMENT ON COLUMN public.students.target_job IS 'Le métier ciblé par l''étudiant';
 COMMENT ON COLUMN public.students.experiences IS 'Historique professionnel extrait du CV (JSON array)';
 COMMENT ON COLUMN public.students.education IS 'Parcours académique extrait du CV (JSON array)';

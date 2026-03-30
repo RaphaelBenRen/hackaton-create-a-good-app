@@ -36,6 +36,28 @@ router.post('/cv', authenticate, upload.single('file'), async (req, res) => {
   res.json({ cv_url: cvUrl });
 });
 
+// POST /api/storage/document — upload generic document (e.g cover letter PDF)
+router.post('/document', authenticate, upload.single('file'), async (req, res) => {
+  if (!req.file) return res.status(400).json({ error: 'Aucun fichier' });
+
+  const ext = req.file.originalname.split('.').pop().toLowerCase();
+  if (ext !== 'pdf' || req.file.mimetype !== 'application/pdf') {
+    return res.status(400).json({ error: 'Only PDF files are allowed' });
+  }
+
+  const safeName = req.file.originalname.replace(/[^a-zA-Z0-9.\-_]/g, '_');
+  const path = `${req.user.id}/doc_${Date.now()}_${safeName}`;
+
+  const { error: uploadError } = await supabase.storage
+    .from('CV')
+    .upload(path, req.file.buffer, { upsert: true, contentType: req.file.mimetype });
+
+  if (uploadError) return res.status(400).json({ error: uploadError.message });
+
+  const { data: urlData } = supabase.storage.from('CV').getPublicUrl(path);
+  res.json({ url: urlData?.publicUrl || null });
+});
+
 // DELETE /api/storage/cv
 router.delete('/cv', authenticate, async (req, res) => {
   try {
