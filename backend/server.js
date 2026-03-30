@@ -18,6 +18,7 @@ app.use('/api/messages', require('./routes/messages'));
 app.use('/api/storage', require('./routes/storage'));
 app.use('/api/cvAnalytics', require('./routes/cvAnalytics'));
 app.use('/api/recommendations', require('./routes/recommendations'));
+app.use('/api/references', require('./routes/references'));
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
