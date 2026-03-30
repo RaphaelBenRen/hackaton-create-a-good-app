@@ -11,6 +11,11 @@ ADD COLUMN IF NOT EXISTS education JSONB DEFAULT '[]'::jsonb,
 ADD COLUMN IF NOT EXISTS target_job VARCHAR(255),
 ADD COLUMN IF NOT EXISTS qualities TEXT[] DEFAULT '{}';
 
+-- Ajout des nouvelles colonnes à la table applications
+ALTER TABLE public.applications
+ADD COLUMN IF NOT EXISTS cover_letter TEXT,
+ADD COLUMN IF NOT EXISTS cv_url VARCHAR(255);
+
 -- (Optionnel) Commentaire sur les colonnes
 COMMENT ON COLUMN public.students.target_job IS 'Le métier ciblé par l''étudiant';
 COMMENT ON COLUMN public.students.experiences IS 'Historique professionnel extrait du CV (JSON array)';
