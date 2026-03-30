@@ -61,8 +61,14 @@ const companySizes = ['1-10', '10-50', '50-200', '200-500', '500+'];
 const offerTypes = ['stage', 'alternance'];
 
 let sql = `-- ============================================
--- SCRIPT DE DONNEES FACTICES DIVERSIFIEES (Finance, Medecine, Commerce, etc.)
--- ============================================
+-- Supprime proprement uniquement les fausses données générées par le script précédent (pour ne pas toucher aux vrais comptes de l'utilisateur)
+DELETE FROM public.applications WHERE student_id IN (SELECT id FROM public.students WHERE user_id IN (SELECT id FROM auth.users WHERE email LIKE '%@student.fr' OR email LIKE 'contact@%'));
+DELETE FROM public.applications WHERE company_id IN (SELECT id FROM public.companies WHERE user_id IN (SELECT id FROM auth.users WHERE email LIKE '%@student.fr' OR email LIKE 'contact@%'));
+DELETE FROM public.conversations WHERE student_id IN (SELECT id FROM public.students WHERE user_id IN (SELECT id FROM auth.users WHERE email LIKE '%@student.fr' OR email LIKE 'contact@%'));
+DELETE FROM public.offers WHERE company_id IN (SELECT id FROM public.companies WHERE user_id IN (SELECT id FROM auth.users WHERE email LIKE '%@student.fr' OR email LIKE 'contact@%'));
+DELETE FROM public.students WHERE user_id IN (SELECT id FROM auth.users WHERE email LIKE '%@student.fr' OR email LIKE 'contact@%');
+DELETE FROM public.companies WHERE user_id IN (SELECT id FROM auth.users WHERE email LIKE '%@student.fr' OR email LIKE 'contact@%');
+DELETE FROM auth.users WHERE email LIKE '%@student.fr' OR email LIKE 'contact@%';
 
 `;
 
@@ -77,11 +83,11 @@ const companies = [];
 companyTemplates.forEach((template, i) => {
     const userId = generateUUID();
     const companyId = generateUUID();
-    const email = `contact@${template.name.toLowerCase().replace(/\\s+/g, '').replace(/'/g, '')}.com`;
+    const email = `contact@${template.name.toLowerCase().replace(/\s+/g, '').replace(/'/g, '')}.com`;
     
     usersSql += `('${userId}', '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated', '${email}', crypt('password123', gen_salt('bf')), now(), '{"provider": "email", "providers": ["email"]}', '{}', now(), now(), '', '', '', ''),\n`;
     
-    companiesSql += `('${companyId}', '${userId}', '${template.name.replace(/'/g, "''")}', '${template.sector.replace(/'/g, "''")}', '${companySizes[Math.floor(Math.random() * companySizes.length)]}', 'Poste au sein de ${template.name.replace(/'/g, "''")}', '${cities[Math.floor(Math.random() * cities.length)]}', 'https://${template.name.toLowerCase().replace(/\\s+/g, '').replace(/'/g, '')}.com', '${email}', '0102030405'),\n`;
+    companiesSql += `('${companyId}', '${userId}', '${template.name.replace(/'/g, "''")}', '${template.sector.replace(/'/g, "''")}', '${companySizes[Math.floor(Math.random() * companySizes.length)]}', 'Poste au sein de ${template.name.replace(/'/g, "''")}', '${cities[Math.floor(Math.random() * cities.length)]}', 'https://${template.name.toLowerCase().replace(/\s+/g, '').replace(/'/g, '')}.com', '${email}', '0102030405'),\n`;
     
     companies.push({ id: companyId, sector: template.sector });
 });
@@ -127,6 +133,22 @@ const getRoleFromSector = (sector, type) => {
 let offerCount = 0;
 const totalOffers = companies.length * 2;
 
+const descriptionTemplates = [
+    "En tant que [TITLE] au sein de notre entreprise, vous serez au cœur de notre développement. \n\nVos missions :\n- Assister l'équipe dans ses tâches quotidiennes stratégiques.\n- Participer activement aux projets en cours et proposer des solutions innovantes.\n- Veiller au bon déroulement des opérations et au respect des délais.\n\nCe que nous recherchons :\nÉtudiant(e) proactif(ve), vous aimez les défis et avez un fort esprit d'équipe. Vous avez une bonne capacité d'analyse et êtes force de proposition.",
+    "Rejoignez un environnement dynamique et stimulant ! Nous recrutons un(e) [TITLE].\n\nVos responsabilités :\n- Prendre en charge des dossiers spécifiques et les mener à bien.\n- Assurer le reporting et le suivi des indicateurs clés (KPIs).\n- Travailler de concert avec les différents départements de l'entreprise.\n\nVotre profil :\nDoté(e) d'un excellent relationnel, vous savez faire preuve de rigueur et d'adaptabilité dans un milieu en constante évolution. Une première expérience est un atout.",
+    "Nous sommes à la recherche de notre futur(e) [TITLE] pour accompagner notre forte croissance.\n\nLe poste :\n- Co-construire et déployer la stratégie de notre département.\n- Analyser les données existantes pour optimiser nos processus.\n- Aider à la gestion de la relation client/partenaire.\n\nVos qualités :\nUne grande soif d'apprendre, beaucoup d'autonomie et une véritable passion pour votre domaine d'études. Rejoignez-nous pour une aventure formatrice !"
+];
+
+const salaries = {
+    stage: ['800 € / mois', '1000 € / mois', '1200 € / mois', 'Indemnité légale + primes'],
+    alternance: ['1200 € / mois', '1500 € / mois', '1800 € / mois', 'Selon grille légale alternance']
+};
+
+const durations = {
+    stage: ['4 mois', '6 mois', '6 mois (Temps plein)'],
+    alternance: ['1 an', '2 ans', '12 mois (Rythme 3 sem / 1 sem)', '24 mois']
+};
+
 for (let i = 0; i < companies.length; i++) {
     for (let j = 0; j < 2; j++) {
         offerCount++;
@@ -135,11 +157,19 @@ for (let i = 0; i < companies.length; i++) {
         const sector = companies[i].sector;
         const title = getRoleFromSector(sector, type);
         
-        const availableSkills = allSkills[sector] || ['Polyvalence'];
-        const offerSkills = ['"' + availableSkills[Math.floor(Math.random() * availableSkills.length)] + '"'];
+        const descTemplate = descriptionTemplates[Math.floor(Math.random() * descriptionTemplates.length)];
+        const description = descTemplate.replace(/\[TITLE\]/g, title);
+
+        const availableSkills = allSkills[sector] || ['Polyvalence', 'Autonomie'];
+        const numberOfSkills = Math.min(availableSkills.length, Math.floor(Math.random() * 3) + 2); // 2 to 4 skills
+        const shuffledSkills = [...availableSkills].sort(() => 0.5 - Math.random());
+        const offerSkills = shuffledSkills.slice(0, numberOfSkills).map(s => '"' + s + '"');
         const skillsStr = `{${offerSkills.join(',')}}`;
         
-        offersSql += `('${offerId}', '${companies[i].id}', '${title.replace(/'/g, "''")}', 'Rejoignez-nous en tant que ${title.replace(/'/g, "''")}.', '${type}', '${sector.replace(/'/g, "''")}', '${cities[Math.floor(Math.random() * cities.length)]}', '${type === 'stage' ? '6 mois' : '12 mois'}', 'Selon profil', '${skillsStr}', '2026-09-01', true)`;
+        const salary = salaries[type][Math.floor(Math.random() * salaries[type].length)];
+        const duration = durations[type][Math.floor(Math.random() * durations[type].length)];
+
+        offersSql += `('${offerId}', '${companies[i].id}', '${title.replace(/'/g, "''")}', '${description.replace(/'/g, "''")}', '${type}', '${sector.replace(/'/g, "''")}', '${cities[Math.floor(Math.random() * cities.length)]}', '${duration}', '${salary}', '${skillsStr}', '2026-09-01', true)`;
         
         if (offerCount === totalOffers) offersSql += ';\n'; else offersSql += ',\n';
     }
