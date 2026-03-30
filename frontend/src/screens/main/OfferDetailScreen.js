@@ -199,19 +199,17 @@ const OfferDetailScreen = ({ route }) => {
           ) : null}
         </GlassCard>
 
-        {/* Description */}
         <GlassCard style={styles.section}>
           <Text style={[styles.sectionTitle, { fontSize: scaledSize(18), color: colors.text }]}>Description</Text>
           <Text style={[styles.bodyText, { fontSize: scaledSize(14), color: colors.textSecondary }]}>{offer.description}</Text>
         </GlassCard>
 
-        {/* Skills */}
         {skillsList.length > 0 && (
           <GlassCard style={styles.section}>
             <Text style={[styles.sectionTitle, { fontSize: scaledSize(18), color: colors.text }]}>{t('requiredSkills')}</Text>
             <View style={styles.chips}>
               {skillsList.map((skill, index) => (
-                <View key={index} style={styles.skillChip}>
+                <View key={index} style={[styles.skillChip, { borderColor: colors.glassBorder, backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(120,120,120,0.05)' }]}>
                   <Text style={[styles.skillChipText, { fontSize: scaledSize(13), color: colors.text }]}>{skill}</Text>
                 </View>
               ))}
@@ -219,7 +217,6 @@ const OfferDetailScreen = ({ route }) => {
           </GlassCard>
         )}
 
-        {/* Info details */}
         <GlassCard style={styles.section}>
           {offer.duration ? (
             <View style={styles.infoRow}>

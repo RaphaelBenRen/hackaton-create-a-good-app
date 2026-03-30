@@ -178,10 +178,10 @@ const SearchScreen = () => {
             </LinearGradient>
           </View>
           <View style={styles.cardInfo}>
-            <Text style={[styles.cardTitle, { fontSize: scaledSize(16) }]} numberOfLines={1}>
+            <Text style={[styles.cardTitle, { fontSize: scaledSize(16), color: colors.text }]} numberOfLines={1}>
               {item.first_name} {item.last_name}
             </Text>
-            <Text style={[styles.cardSecondary, { fontSize: scaledSize(13) }]} numberOfLines={1}>
+            <Text style={[styles.cardSecondary, { fontSize: scaledSize(13), color: colors.textSecondary }]} numberOfLines={1}>
               {item.study_field}{item.city ? ` \u2022 ${item.city}` : ''}
             </Text>
 
@@ -198,7 +198,7 @@ const SearchScreen = () => {
               <View style={styles.skillsRow}>
                 {item.skills.slice(0, 4).map((skill, i) => (
                   <View key={i} style={styles.skillChip}>
-                    <Text style={[styles.skillChipText, { fontSize: scaledSize(13) }]}>{skill}</Text>
+                    <Text style={[styles.skillChipText, { fontSize: scaledSize(13), color: colors.text }]}>{skill}</Text>
                   </View>
                 ))}
               </View>
@@ -206,7 +206,7 @@ const SearchScreen = () => {
 
             {/* search type + dates */}
             {(item.search_type || item.contract_start) && (
-              <Text style={[styles.infoLine, { fontSize: scaledSize(13) }]}>
+              <Text style={[styles.infoLine, { fontSize: scaledSize(13), color: colors.textTertiary }]}>
                 {item.search_type || ''}
                 {item.contract_start ? ` \u2022 ${item.contract_start}` : ''}
                 {item.contract_end ? ` - ${item.contract_end}` : ''}
@@ -225,17 +225,17 @@ const SearchScreen = () => {
       <SafeAreaView edges={['top']} style={{ flex: 1 }}>
         {/* header */}
         <View style={styles.header}>
-          <Text style={[styles.title, { fontSize: scaledSize(22) }]} accessibilityRole="header">
+          <Text style={[styles.title, { fontSize: scaledSize(22), color: colors.text }]} accessibilityRole="header">
             {t('search')}
           </Text>
         </View>
 
         {/* search bar */}
         <View style={styles.searchContainer}>
-          <View style={styles.searchBox}>
+          <View style={[styles.searchBox, { backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(120,120,120,0.05)', borderColor: colors.glassBorder }]}>
             <Feather name="search" size={20} color={colors.textTertiary} />
             <TextInput
-              style={[styles.searchInput, { fontSize: scaledSize(16) }]}
+              style={[styles.searchInput, { fontSize: scaledSize(16), color: colors.text }]}
               placeholder={t('searchPlaceholder')}
               placeholderTextColor={colors.textTertiary}
               value={searchText}
@@ -265,15 +265,14 @@ const SearchScreen = () => {
                 <TouchableOpacity
                   key={type.key}
                   onPress={() => setTypeFilter(type.key)}
-                  style={[styles.filterChip, typeFilter === type.key && styles.filterChipActive]}
+                  style={[styles.filterChip, typeFilter === type.key && { backgroundColor: colors.accent, borderColor: colors.accent }]}
                   accessibilityRole="radio"
                   accessibilityState={{ selected: typeFilter === type.key }}
                   accessibilityLabel={type.label}
                 >
                   <Text style={[
                     styles.filterChipText,
-                    { fontSize: scaledSize(13) },
-                    typeFilter === type.key && styles.filterChipTextActive,
+                    { fontSize: scaledSize(13), color: typeFilter === type.key ? '#fff' : colors.textSecondary },
                   ]}>{type.label}</Text>
                 </TouchableOpacity>
               ))}
@@ -282,19 +281,19 @@ const SearchScreen = () => {
             {/* sector button opening modal */}
             <TouchableOpacity
               onPress={() => setIsSectorModalVisible(true)}
-              style={[styles.filterChip, sectorFilter !== 'all' && styles.filterChipActive, { marginLeft: 20, marginBottom: 12, alignSelf: 'flex-start' }]}
+              style={[styles.filterChip, sectorFilter !== 'all' && { backgroundColor: colors.accent, borderColor: colors.accent }, { marginLeft: 20, marginBottom: 12, alignSelf: 'flex-start' }]}
             >
-              <Text style={[styles.filterChipText, sectorFilter !== 'all' && styles.filterChipTextActive]}>
+              <Text style={[styles.filterChipText, { color: sectorFilter !== 'all' ? '#fff' : colors.textSecondary }]}>
                 {sectorFilter === 'all' ? t('allSectors') + ' ▾' : sectorFilter + ' ▾'}
               </Text>
             </TouchableOpacity>
 
             {/* city filter */}
             <View style={styles.cityFilterContainer}>
-              <View style={styles.cityFilterBox}>
+              <View style={[styles.cityFilterBox, { backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(120,120,120,0.05)', borderColor: colors.glassBorder }]}>
                 <Feather name="map-pin" size={16} color={colors.textTertiary} />
                 <TextInput
-                  style={[styles.cityInput, { fontSize: scaledSize(14) }]}
+                  style={[styles.cityInput, { fontSize: scaledSize(14), color: colors.text }]}
                   placeholder={t('cityFilter') || 'Ville...'}
                   placeholderTextColor={colors.textTertiary}
                   value={cityFilter}
@@ -325,9 +324,9 @@ const SearchScreen = () => {
           ListEmptyComponent={
             hasSearched ? (
               <GlassCard style={styles.empty}>
-                <Feather name="search" size={48} color={colors.textTertiary} />
-                <Text style={[styles.emptyTitle, { fontSize: scaledSize(16) }]}>{t('noResults')}</Text>
-                <Text style={[styles.emptyDesc, { fontSize: scaledSize(14) }]}>{t('noResultsDesc')}</Text>
+                <Feather name="search" size={60} color={colors.textTertiary} />
+                <Text style={[styles.emptyTitle, { fontSize: scaledSize(18), color: colors.text }]}>{t('noResults')}</Text>
+                <Text style={[styles.emptyDesc, { fontSize: scaledSize(14), color: colors.textSecondary }]}>{t('noResultsDesc')}</Text>
               </GlassCard>
             ) : null
           }

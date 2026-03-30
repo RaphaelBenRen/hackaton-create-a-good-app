@@ -182,15 +182,15 @@ const CreateOfferScreen = () => {
         <TouchableOpacity
           key={item.key}
           onPress={() => onSelect(item.key)}
-          style={[styles.chip, selected === item.key && styles.chipActive]}
+          style={[styles.chip, { borderColor: colors.glassBorder, backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(120,120,120,0.05)' }, selected === item.key && { backgroundColor: colors.primary, borderColor: colors.accent }]}
           accessibilityRole="radio"
           accessibilityState={{ selected: selected === item.key }}
           accessibilityLabel={item.label}
         >
           <Text style={[
             styles.chipText,
-            { fontSize: scaledSize(13) },
-            selected === item.key && styles.chipTextActive,
+            { fontSize: scaledSize(13), color: selected === item.key ? (isDarkMode ? '#fff' : colors.text) : colors.textSecondary },
+            selected === item.key && { fontWeight: 'bold' },
           ]}>{item.label}</Text>
         </TouchableOpacity>
       ))}
@@ -298,13 +298,13 @@ const CreateOfferScreen = () => {
         <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
-            style={[styles.backButton, { backgroundColor: 'rgba(120,120,120,0.1)', borderColor: colors.glassBorder }]}
+            style={[styles.backButton, { backgroundColor: isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(120,120,120,0.1)', borderColor: colors.glassBorder }]}
             accessibilityRole="button"
             accessibilityLabel={t('back')}
           >
             <Feather name="chevron-left" size={24} color={colors.text} />
           </TouchableOpacity>
-          <Text style={[styles.headerTitle, { fontSize: scaledSize(17) }]}>
+          <Text style={[styles.headerTitle, { fontSize: scaledSize(17), color: colors.text }]}>
             {t('createOffer')}
           </Text>
           <View style={{ width: 44 }} />
@@ -321,7 +321,7 @@ const CreateOfferScreen = () => {
               <Text style={{ fontSize: scaledSize(16), color: colors.accent, fontWeight: '700', marginLeft: 8 }}>Import Intelligent (PDF)</Text>
             </View>
             <TouchableOpacity
-              style={[styles.uploadButton, pdfFile && styles.uploadButtonDone]}
+              style={[styles.uploadButton, pdfFile && styles.uploadButtonDone, { borderColor: pdfFile ? colors.success : colors.accent, backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(120,120,120,0.05)' }]}
               onPress={handlePickPDF}
               disabled={aiAnalyzing}
             >
@@ -334,14 +334,14 @@ const CreateOfferScreen = () => {
                   color={pdfFile ? colors.success : colors.text}
                 />
               )}
-              <Text style={[styles.uploadText, { fontSize: scaledSize(15) }]}>
+              <Text style={[styles.uploadText, { fontSize: scaledSize(15), color: colors.text }]}>
                 {aiAnalyzing ? "Analyse en cours..." : (pdfFile ? pdfFile.name : "Importer ma fiche de poste en PDF")}
               </Text>
             </TouchableOpacity>
 
-            <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 20 }]}>{t('offerTitle')} *</Text>
+            <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 20, color: colors.text }]}>{t('offerTitle')} *</Text>
             <TextInput
-              style={[styles.input, { fontSize: scaledSize(16), color: colors.text, borderColor: colors.glassBorder }]}
+              style={[styles.input, { fontSize: scaledSize(16), color: colors.text, borderColor: colors.glassBorder, backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(120,120,120,0.05)' }]}
               placeholder={t('offerTitlePlaceholder')}
               placeholderTextColor={colors.textTertiary}
               value={title}
@@ -350,9 +350,9 @@ const CreateOfferScreen = () => {
               accessibilityLabel={t('offerTitle')}
             />
 
-            <Text style={[styles.label, { fontSize: scaledSize(14) }]}>{t('offerDescription')}</Text>
+            <Text style={[styles.label, { fontSize: scaledSize(14), color: colors.text }]}>{t('offerDescription')}</Text>
             <TextInput
-              style={[styles.input, styles.multiline, { fontSize: scaledSize(16), color: colors.text, borderColor: colors.glassBorder }]}
+              style={[styles.input, styles.multiline, { fontSize: scaledSize(16), color: colors.text, borderColor: colors.glassBorder, backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(120,120,120,0.05)' }]}
               placeholder={t('offerDescriptionPlaceholder')}
               placeholderTextColor={colors.textTertiary}
               value={description}
@@ -363,7 +363,7 @@ const CreateOfferScreen = () => {
               accessibilityLabel={t('offerDescription')}
             />
 
-            <Text style={[styles.label, { fontSize: scaledSize(14) }]}>{t('offerType')}</Text>
+            <Text style={[styles.label, { fontSize: scaledSize(14), color: colors.text }]}>{t('offerType')}</Text>
             {renderChips(offerTypes, offerType, setOfferType)}
 
             <SearchableDropdown 
@@ -384,10 +384,10 @@ const CreateOfferScreen = () => {
               topData={topCities}
             />
 
-            <Text style={[styles.label, { fontSize: scaledSize(14) }]}>{t('offerDuration')}</Text>
+            <Text style={[styles.label, { fontSize: scaledSize(14), color: colors.text }]}>{t('offerDuration')}</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 15 }}>
               <TextInput
-                style={[styles.input, { flex: 1, fontSize: scaledSize(16), minHeight: 44, marginBottom: 0, color: colors.text, borderColor: colors.glassBorder }]}
+                style={[styles.input, { flex: 1, fontSize: scaledSize(16), minHeight: 44, marginBottom: 0, color: colors.text, borderColor: colors.glassBorder, backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(120,120,120,0.05)' }]}
                 placeholder="Ex: 6"
                 placeholderTextColor={colors.textTertiary}
                 keyboardType="numeric"
@@ -399,18 +399,18 @@ const CreateOfferScreen = () => {
                   <TouchableOpacity
                     key={p.key}
                     onPress={() => setDurationPeriod(p.key)}
-                    style={[styles.chip, { flex: 1, paddingHorizontal: 5, minHeight: 44, marginBottom: 0, paddingVertical: 5 }, durationPeriod === p.key && styles.chipActive]}
+                    style={[styles.chip, { flex: 1, paddingHorizontal: 5, minHeight: 44, marginBottom: 0, paddingVertical: 5, backgroundColor: durationPeriod === p.key ? colors.primary : (isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(120,120,120,0.05)'), borderColor: durationPeriod === p.key ? colors.accent : colors.glassBorder }]}
                   >
-                    <Text style={[styles.chipText, { textAlign: 'center' }, durationPeriod === p.key && styles.chipTextActive]}>{p.label}</Text>
+                    <Text style={[styles.chipText, { textAlign: 'center', color: durationPeriod === p.key ? (isDarkMode ? '#fff' : colors.text) : colors.textSecondary }]}>{p.label}</Text>
                   </TouchableOpacity>
                 ))}
               </View>
             </View>
 
-            <Text style={[styles.label, { fontSize: scaledSize(14) }]}>Rémunération / Salaire</Text>
+            <Text style={[styles.label, { fontSize: scaledSize(14), color: colors.text }]}>Rémunération / Salaire</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 15 }}>
               <TextInput
-                style={[styles.input, { flex: 1, fontSize: scaledSize(16), minHeight: 44, marginBottom: 0, color: colors.text, borderColor: colors.glassBorder }]}
+                style={[styles.input, { flex: 1, fontSize: scaledSize(16), minHeight: 44, marginBottom: 0, color: colors.text, borderColor: colors.glassBorder, backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(120,120,120,0.05)' }]}
                 placeholder="Ex: 1500"
                 placeholderTextColor={colors.textTertiary}
                 keyboardType="numeric"
@@ -422,9 +422,9 @@ const CreateOfferScreen = () => {
                   <TouchableOpacity
                     key={c.key}
                     onPress={() => setSalaryCurrency(c.key)}
-                    style={[styles.chip, { paddingHorizontal: 10, minHeight: 44, marginBottom: 0, paddingVertical: 5 }, salaryCurrency === c.key && styles.chipActive]}
+                    style={[styles.chip, { paddingHorizontal: 10, minHeight: 44, marginBottom: 0, paddingVertical: 5, backgroundColor: salaryCurrency === c.key ? colors.primary : (isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(120,120,120,0.05)'), borderColor: salaryCurrency === c.key ? colors.accent : colors.glassBorder }]}
                   >
-                    <Text style={[styles.chipText, salaryCurrency === c.key && styles.chipTextActive]}>{c.label}</Text>
+                    <Text style={[styles.chipText, { color: salaryCurrency === c.key ? (isDarkMode ? '#fff' : colors.text) : colors.textSecondary }]}>{c.label}</Text>
                   </TouchableOpacity>
                 ))}
               </View>
@@ -433,9 +433,9 @@ const CreateOfferScreen = () => {
               {renderChips(periods, salaryPeriod, setSalaryPeriod)}
             </View>
 
-            <Text style={[styles.label, { fontSize: scaledSize(14) }]}>{t('offerSkills')}</Text>
+            <Text style={[styles.label, { fontSize: scaledSize(14), color: colors.text }]}>{t('offerSkills')}</Text>
             {skills.map((s, index) => (
-              <View key={`skill-${index}`} style={[styles.dynamicBox, { padding: 4, paddingLeft: 10, flexDirection: 'row', alignItems: 'center' }]}>
+              <View key={`skill-${index}`} style={[styles.dynamicBox, { padding: 4, paddingLeft: 10, flexDirection: 'row', alignItems: 'center', borderColor: colors.glassBorder, backgroundColor: isDarkMode ? 'rgba(0,0,0,0.2)' : 'rgba(0,0,0,0.05)' }]}>
                 <SearchableDropdown 
                   variant="dynamicBox"
                   placeholder="Ex: React JS, Management..."
@@ -454,9 +454,9 @@ const CreateOfferScreen = () => {
               <Text style={[styles.addBtnText, { color: colors.success }]}>Ajouter une compétence</Text>
             </TouchableOpacity>
 
-            <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 20 }]}>{t('startDate')}</Text>
+            <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 20, color: colors.text }]}>{t('startDate')}</Text>
             <TextInput
-              style={[styles.input, { fontSize: scaledSize(16), marginBottom: 15, color: colors.text, borderColor: colors.glassBorder }]}
+              style={[styles.input, { fontSize: scaledSize(16), marginBottom: 15, color: colors.text, borderColor: colors.glassBorder, backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(120,120,120,0.05)' }]}
               placeholder="JJ/MM/AAAA"
               placeholderTextColor={colors.textTertiary}
               value={startDateStr}
@@ -465,9 +465,9 @@ const CreateOfferScreen = () => {
               maxLength={10}
             />
 
-            <Text style={[styles.label, { fontSize: scaledSize(14) }]}>{t('endDate')}</Text>
+            <Text style={[styles.label, { fontSize: scaledSize(14), color: colors.text }]}>{t('endDate')}</Text>
             <TextInput
-              style={[styles.input, { fontSize: scaledSize(16), marginBottom: 15, color: colors.text, borderColor: colors.glassBorder }]}
+              style={[styles.input, { fontSize: scaledSize(16), marginBottom: 15, color: colors.text, borderColor: colors.glassBorder, backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(120,120,120,0.05)' }]}
               placeholder="JJ/MM/AAAA"
               placeholderTextColor={colors.textTertiary}
               value={endDateStr}
@@ -500,59 +500,43 @@ const styles = StyleSheet.create({
   },
   backButton: {
     width: 44, height: 44, borderRadius: 22,
-    backgroundColor: 'rgba(255,255,255,0.1)',
     justifyContent: 'center', alignItems: 'center',
-    borderWidth: 1, borderColor: COLORS.glassBorder,
+    borderWidth: 1,
   },
   headerTitle: { fontWeight: '600', flex: 1, textAlign: 'center' },
   scroll: { paddingHorizontal: 20, paddingBottom: 40 },
   label: { fontWeight: '600', marginBottom: 8, marginTop: 16 },
   input: {
-    backgroundColor: 'rgba(120,120,120,0.05)',
     borderRadius: 16, padding: 15,
-    borderWidth: 1, borderColor: COLORS.glassBorder, minHeight: 48,
+    borderWidth: 1, minHeight: 48,
   },
   multiline: { minHeight: 120, textAlignVertical: 'top', borderRadius: 12 },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   chip: {
     paddingHorizontal: 16, paddingVertical: 10, borderRadius: 20,
-    backgroundColor: 'rgba(120,120,120,0.05)',
-    borderWidth: 1, borderColor: COLORS.glassBorder, minHeight: 44, justifyContent: 'center',
+    borderWidth: 1, minHeight: 44, justifyContent: 'center',
   },
-  chipActive: { backgroundColor: COLORS.primary, borderColor: COLORS.accent },
-  chipText: { color: COLORS.textSecondary },
+  chipText: { },
   chipTextActive: { color: '#fff', fontWeight: 'bold' },
-  dateButton: {
-    flexDirection: 'row', alignItems: 'center', gap: 12,
-    backgroundColor: 'rgba(255,255,255,0.05)',
-    borderRadius: 16, padding: 15, minHeight: 48,
-    borderWidth: 1, borderColor: COLORS.glassBorder,
-  },
-  dateText: { color: COLORS.text },
-  dateModalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.7)', justifyContent: 'flex-end' },
-  dateModalContent: { backgroundColor: COLORS.secondary, borderTopLeftRadius: 20, borderTopRightRadius: 20, paddingBottom: 30 },
-  dateModalHeader: { flexDirection: 'row', justifyContent: 'space-between', padding: 16, borderBottomWidth: 1, borderBottomColor: COLORS.glassBorder },
-  dateModalCancel: { color: COLORS.error, fontSize: 16, fontWeight: '600' },
-  dateModalDone: { color: COLORS.accent, fontSize: 16, fontWeight: '600' },
   uploadButton: {
     alignItems: 'center', justifyContent: 'center', paddingVertical: 24, borderRadius: 16,
-    borderWidth: 2, borderColor: COLORS.accent, borderStyle: 'dashed', backgroundColor: 'rgba(120,120,120,0.05)'
+    borderWidth: 2, borderStyle: 'dashed',
   },
-  uploadButtonDone: { borderColor: COLORS.success, borderStyle: 'solid', backgroundColor: 'rgba(120,120,120,0.08)' },
+  uploadButtonDone: { borderStyle: 'solid' },
   uploadText: { fontWeight: '600', marginTop: 10, textAlign: 'center' },
   dynamicBox: {
-    backgroundColor: 'rgba(0,0,0,0.2)', padding: 12, borderRadius: 12, marginBottom: 12,
-    borderWidth: 1, borderColor: 'rgba(255,255,255,0.05)',
+    padding: 12, borderRadius: 12, marginBottom: 12,
+    borderWidth: 1,
   },
   dynamicInput: {
-    backgroundColor: 'rgba(120,120,120,0.05)', borderRadius: 10, padding: 10,
+    borderRadius: 10, padding: 10,
     marginBottom: 6, fontSize: 14,
   },
   addBtn: {
     flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 12,
-    marginTop: 4, borderRadius: 12, backgroundColor: 'rgba(0, 184, 148, 0.1)', marginBottom: 15
+    marginTop: 4, borderRadius: 12, marginBottom: 15
   },
-  addBtnText: { color: COLORS.success, fontWeight: '600', marginLeft: 8 },
+  addBtnText: { fontWeight: '600', marginLeft: 8 },
 });
 
 export default CreateOfferScreen;

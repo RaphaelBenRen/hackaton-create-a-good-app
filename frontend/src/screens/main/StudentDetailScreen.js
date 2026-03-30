@@ -171,7 +171,7 @@ const StudentDetailScreen = ({ route }) => {
         >
           <Feather name="chevron-left" size={24} color={isDarkMode ? "#fff" : colors.text} />
         </TouchableOpacity>
-        <Text style={[styles.headerTitle, { fontSize: scaledSize(17) }]}>
+        <Text style={[styles.headerTitle, { fontSize: scaledSize(17), color: colors.text }]}>
           {t('studentDetails')}
         </Text>
         <TouchableOpacity
@@ -197,12 +197,12 @@ const StudentDetailScreen = ({ route }) => {
             <Text style={[styles.initialsText, { fontSize: scaledSize(28) }]}>{initials}</Text>
           </LinearGradient>
 
-          <Text style={[styles.studentName, { fontSize: scaledSize(22) }]}>
+          <Text style={[styles.studentName, { fontSize: scaledSize(22), color: colors.text }]}>
             {student.first_name} {student.last_name}
           </Text>
 
           {student.study_field && (
-            <Text style={[styles.studyField, { fontSize: scaledSize(14) }]}>
+            <Text style={[styles.studyField, { fontSize: scaledSize(14), color: colors.textSecondary }]}>
               {student.study_field}
             </Text>
           )}
@@ -219,20 +219,20 @@ const StudentDetailScreen = ({ route }) => {
         {/* About */}
         {student.bio ? (
           <GlassCard style={styles.section}>
-            <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>
+            <Text style={[styles.sectionTitle, { fontSize: scaledSize(16), color: colors.text }]}>
               {t('bio')}
             </Text>
-            <Text style={[styles.bodyText, { fontSize: scaledSize(14) }]}>{student.bio}</Text>
+            <Text style={[styles.bodyText, { fontSize: scaledSize(14), color: colors.textSecondary }]}>{student.bio}</Text>
           </GlassCard>
         ) : null}
 
         {/* Education */}
         {Array.isArray(student.education) && student.education.length > 0 && (
           <GlassCard style={styles.section}>
-            <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>Formations</Text>
+            <Text style={[styles.sectionTitle, { fontSize: scaledSize(16), color: colors.text }]}>Formations</Text>
             {student.education.map((edu, idx) => (
-              <View key={idx} style={{ marginBottom: 12, borderBottomWidth: idx < student.education.length - 1 ? 1 : 0, borderBottomColor: 'rgba(255,255,255,0.1)', paddingBottom: 8 }}>
-                <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: scaledSize(15) }}>{edu.degree}</Text>
+              <View key={idx} style={{ marginBottom: 12, borderBottomWidth: idx < student.education.length - 1 ? 1 : 0, borderBottomColor: colors.glassBorder, paddingBottom: 8 }}>
+                <Text style={{ color: colors.text, fontWeight: 'bold', fontSize: scaledSize(15) }}>{edu.degree}</Text>
                 <Text style={{ color: colors.textSecondary, fontSize: scaledSize(14) }}>{edu.institution}</Text>
                 {edu.year ? <Text style={{ color: colors.accent, fontSize: scaledSize(13), marginTop: 2 }}>{edu.year}</Text> : null}
               </View>
@@ -243,10 +243,10 @@ const StudentDetailScreen = ({ route }) => {
         {/* Experiences */}
         {Array.isArray(student.experiences) && student.experiences.length > 0 && (
           <GlassCard style={styles.section}>
-            <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>Expériences</Text>
+            <Text style={[styles.sectionTitle, { fontSize: scaledSize(16), color: colors.text }]}>Expériences</Text>
             {student.experiences.map((exp, idx) => (
-              <View key={idx} style={{ marginBottom: 12, borderBottomWidth: idx < student.experiences.length - 1 ? 1 : 0, borderBottomColor: 'rgba(255,255,255,0.1)', paddingBottom: 8 }}>
-                <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: scaledSize(15) }}>{exp.title}</Text>
+              <View key={idx} style={{ marginBottom: 12, borderBottomWidth: idx < student.experiences.length - 1 ? 1 : 0, borderBottomColor: colors.glassBorder, paddingBottom: 8 }}>
+                <Text style={{ color: colors.text, fontWeight: 'bold', fontSize: scaledSize(15) }}>{exp.title}</Text>
                 <Text style={{ color: colors.textSecondary, fontSize: scaledSize(14) }}>{exp.company}</Text>
                 {exp.duration ? <Text style={{ color: colors.accent, fontSize: scaledSize(13), marginTop: 2 }}>{exp.duration}</Text> : null}
               </View>
@@ -257,13 +257,13 @@ const StudentDetailScreen = ({ route }) => {
         {/* Skills */}
         {skillsList.length > 0 && (
           <GlassCard style={styles.section}>
-            <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>
+            <Text style={[styles.sectionTitle, { fontSize: scaledSize(16), color: colors.text }]}>
               {t('skills')}
             </Text>
             <View style={styles.chips}>
               {skillsList.map((skill, index) => (
-                <View key={index} style={styles.skillChip}>
-                  <Text style={[styles.skillChipText, { fontSize: scaledSize(13) }]}>{skill}</Text>
+                <View key={index} style={[styles.skillChip, { borderColor: colors.glassBorder, backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(120,120,120,0.05)' }]}>
+                  <Text style={[styles.skillChipText, { fontSize: scaledSize(13), color: colors.text }]}>{skill}</Text>
                 </View>
               ))}
             </View>
@@ -272,14 +272,14 @@ const StudentDetailScreen = ({ route }) => {
 
         {/* Search preferences */}
         <GlassCard style={styles.section}>
-          <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>
+          <Text style={[styles.sectionTitle, { fontSize: scaledSize(16), color: colors.text }]}>
             {t('searchType')}
           </Text>
 
           {student.search_type && (
             <View style={styles.infoRow}>
               <Feather name="target" size={18} color={colors.accent} />
-              <Text style={[styles.infoText, { fontSize: scaledSize(14) }]}>
+              <Text style={[styles.infoText, { fontSize: scaledSize(14), color: colors.text }]}>
                 {student.search_type === 'stage' ? t('stage') :
                  student.search_type === 'alternance' ? t('alternance') : t('both')}
               </Text>
@@ -289,7 +289,7 @@ const StudentDetailScreen = ({ route }) => {
           {student.city && (
             <View style={styles.infoRow}>
               <Feather name="map-pin" size={18} color={colors.accent} />
-              <Text style={[styles.infoText, { fontSize: scaledSize(14) }]}>
+              <Text style={[styles.infoText, { fontSize: scaledSize(14), color: colors.text }]}>
                 {student.city}
                 {student.mobility_radius ? ` (${student.mobility_radius} km)` : ''}
               </Text>
@@ -299,7 +299,7 @@ const StudentDetailScreen = ({ route }) => {
           {(student.contract_start_date || student.contract_end_date) && (
             <View style={styles.infoRow}>
               <Feather name="calendar" size={18} color={colors.accent} />
-              <Text style={[styles.infoText, { fontSize: scaledSize(14) }]}>
+              <Text style={[styles.infoText, { fontSize: scaledSize(14), color: colors.text }]}>
                 {formatDate(student.contract_start_date)} — {formatDate(student.contract_end_date)}
               </Text>
             </View>
@@ -308,7 +308,7 @@ const StudentDetailScreen = ({ route }) => {
           {student.phone && (
             <View style={styles.infoRow}>
               <Feather name="phone" size={18} color={colors.accent} />
-              <Text style={[styles.infoText, { fontSize: scaledSize(14) }]}>
+              <Text style={[styles.infoText, { fontSize: scaledSize(14), color: colors.text }]}>
                 {student.phone}
               </Text>
             </View>
@@ -318,7 +318,7 @@ const StudentDetailScreen = ({ route }) => {
         {/* CV section */}
         {student.cv_url && (
           <GlassCard style={styles.section}>
-            <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>CV</Text>
+            <Text style={[styles.sectionTitle, { fontSize: scaledSize(16), color: colors.text }]}>CV</Text>
 
             {/* CV file info */}
             <View style={styles.cvFileRow}>
@@ -326,22 +326,22 @@ const StudentDetailScreen = ({ route }) => {
                 <Feather name="file-text" size={24} color={colors.accent} />
               </View>
               <View style={{ flex: 1 }}>
-                <Text style={[styles.cvFileName, { fontSize: scaledSize(14) }]} numberOfLines={1}>
+                <Text style={[styles.cvFileName, { fontSize: scaledSize(14), color: colors.text }]} numberOfLines={1}>
                   {student.cv_url.split('/').pop() || 'cv.pdf'}
                 </Text>
-                <Text style={[styles.cvFileSub, { fontSize: scaledSize(12) }]}>PDF</Text>
+                <Text style={[styles.cvFileSub, { fontSize: scaledSize(12), color: colors.textSecondary }]}>PDF</Text>
               </View>
             </View>
 
             {/* Open CV button */}
             <TouchableOpacity
-              style={styles.cvButton}
+              style={[styles.cvButton, { borderColor: colors.accent, backgroundColor: colors.accent + '15' }]}
               onPress={handleDownloadCV}
               accessibilityRole="button"
               accessibilityLabel={t('downloadCV')}
             >
               <Feather name="external-link" size={18} color={colors.accent} />
-              <Text style={[styles.cvButtonText, { fontSize: scaledSize(14) }]}>
+              <Text style={[styles.cvButtonText, { fontSize: scaledSize(14), color: colors.accent }]}>
                 {t('openCV')}
               </Text>
             </TouchableOpacity>
@@ -369,11 +369,11 @@ const StudentDetailScreen = ({ route }) => {
       {/* Offer picker modal */}
       <Modal visible={showOfferPicker} transparent animationType="slide">
         <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <Text style={[styles.modalTitle, { fontSize: scaledSize(18) }]}>
+          <View style={[styles.modalContent, { backgroundColor: colors.background, borderColor: colors.glassBorder }]}>
+            <Text style={[styles.modalTitle, { fontSize: scaledSize(18), color: colors.text }]}>
               {t('chooseOffer') || 'Choisir une offre'}
             </Text>
-            <Text style={[styles.modalSubtitle, { fontSize: scaledSize(13) }]}>
+            <Text style={[styles.modalSubtitle, { fontSize: scaledSize(13), color: colors.textSecondary }]}>
               {t('chooseOfferDesc') || 'Pour quelle offre voulez-vous inviter cet·te étudiant·e ?'}
             </Text>
             <FlatList
@@ -381,21 +381,21 @@ const StudentDetailScreen = ({ route }) => {
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => (
                 <TouchableOpacity
-                  style={styles.offerItem}
+                  style={[styles.offerItem, { backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(120,120,120,0.05)', borderColor: colors.glassBorder }]}
                   onPress={() => handleInvite(item.id)}
                   accessibilityRole="button"
                   accessibilityLabel={item.title}
                 >
                   <Feather name="briefcase" size={18} color={colors.accent} />
                   <View style={{ flex: 1, marginLeft: 12 }}>
-                    <Text style={[styles.offerItemTitle, { fontSize: scaledSize(15) }]}>
+                    <Text style={[styles.offerItemTitle, { fontSize: scaledSize(15), color: colors.text }]}>
                       {item.title}
                     </Text>
-                    <Text style={[styles.offerItemType, { fontSize: scaledSize(12) }]}>
+                    <Text style={[styles.offerItemType, { fontSize: scaledSize(12), color: colors.textSecondary }]}>
                       {item.type === 'stage' ? t('stage') : t('alternance')}
                     </Text>
                   </View>
-                  <Feather name="chevron-right" size={18} color={COLORS.textTertiary} />
+                  <Feather name="chevron-right" size={18} color={colors.textTertiary} />
                 </TouchableOpacity>
               )}
               style={{ maxHeight: 300 }}

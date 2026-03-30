@@ -291,7 +291,7 @@ const ApplicationsScreen = () => {
   /* ── empty state ── */
   const EmptyState = () => (
     <GlassCard style={styles.empty}>
-      <Feather name="file-text" size={60} color={COLORS.textTertiary} />
+      <Feather name="file-text" size={60} color={colors.textTertiary} />
       <Text style={[styles.emptyTitle, { fontSize: scaledSize(18) }]}>{t('noApplications')}</Text>
       <Text style={[styles.emptyDesc, { fontSize: scaledSize(14) }]}>{t('noApplicationsDesc')}</Text>
     </GlassCard>
