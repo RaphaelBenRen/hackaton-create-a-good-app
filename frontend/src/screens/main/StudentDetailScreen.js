@@ -431,13 +431,13 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 22,
-    backgroundColor: 'rgba(255,255,255,0.1)',
+    backgroundColor: 'rgba(120,120,120,0.1)',
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
     borderColor: COLORS.glassBorder,
   },
-  headerTitle: { fontWeight: '600', color: '#fff', flex: 1, textAlign: 'center' },
+  headerTitle: { fontWeight: '600', color: COLORS.text, flex: 1, textAlign: 'center' },
   scroll: { paddingHorizontal: 20, paddingBottom: 40 },
 
   // Profile header
@@ -451,7 +451,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   initialsText: { fontWeight: 'bold', color: '#fff' },
-  studentName: { fontWeight: 'bold', color: '#fff', textAlign: 'center' },
+  studentName: { fontWeight: 'bold', color: COLORS.text, textAlign: 'center' },
   studyField: { color: COLORS.textSecondary, marginTop: 4, textAlign: 'center' },
   statusBadge: {
     flexDirection: 'row',
@@ -467,24 +467,24 @@ const styles = StyleSheet.create({
 
   // Sections
   section: { marginTop: 14 },
-  sectionTitle: { fontWeight: '700', color: '#fff', marginBottom: 10 },
+  sectionTitle: { fontWeight: '700', color: COLORS.text, marginBottom: 10 },
   bodyText: { color: COLORS.textSecondary, lineHeight: 22 },
 
   // Skills
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   skillChip: {
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    borderRadius: 20,
-    backgroundColor: 'rgba(255,255,255,0.05)',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 10,
+    backgroundColor: 'rgba(120,120,120,0.05)',
     borderWidth: 1,
     borderColor: COLORS.glassBorder,
   },
-  skillChipText: { color: '#fff' },
+  skillChipText: { color: COLORS.text, fontWeight: '500' },
 
   // Info rows
   infoRow: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 12 },
-  infoText: { color: '#fff', fontWeight: '500' },
+  infoText: { color: COLORS.text, fontWeight: '500' },
 
   // CV
   cvFileRow: {
@@ -492,16 +492,22 @@ const styles = StyleSheet.create({
   },
   cvFileIcon: {
     width: 48, height: 48, borderRadius: 12,
-    backgroundColor: `${COLORS.accent}15`,
+    backgroundColor: COLORS.accent + '15',
     justifyContent: 'center', alignItems: 'center',
   },
-  cvFileName: { color: '#fff', fontWeight: '600' },
+  cvFileName: { color: COLORS.text, fontWeight: '600' },
   cvFileSub: { color: COLORS.textSecondary, marginTop: 2 },
   cvButton: {
-    flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8,
-    paddingVertical: 12, borderRadius: 12,
-    borderWidth: 1, borderColor: COLORS.accent,
-    backgroundColor: 'rgba(59,130,246,0.08)', minHeight: 44,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    paddingVertical: 12,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: COLORS.accent,
+    backgroundColor: 'rgba(59, 130, 246, 0.08)',
+    minHeight: 44,
   },
   cvButtonText: { color: COLORS.accent, fontWeight: '600' },
 
@@ -516,27 +522,23 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   modalContent: {
-    backgroundColor: COLORS.secondary,
+    backgroundColor: COLORS.background,
     borderRadius: 20,
     padding: 24,
     borderWidth: 1,
     borderColor: COLORS.glassBorder,
   },
-  modalTitle: { fontWeight: '700', color: '#fff', marginBottom: 4 },
+  modalTitle: { fontWeight: '700', color: COLORS.text, marginBottom: 4 },
   modalSubtitle: { color: COLORS.textSecondary, marginBottom: 16 },
   offerItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 14,
-    paddingHorizontal: 12,
+    padding: 16,
     borderRadius: 12,
-    backgroundColor: 'rgba(255,255,255,0.05)',
-    marginBottom: 8,
-    minHeight: 48,
+    backgroundColor: 'rgba(120,120,120,0.05)',
+    marginBottom: 10,
     borderWidth: 1,
-    borderColor: COLORS.glassBorder,
+    borderColor: 'rgba(120,120,120,0.1)',
   },
-  offerItemTitle: { fontWeight: '600', color: '#fff' },
+  offerItemTitle: { fontWeight: '600', color: COLORS.text },
   offerItemType: { color: COLORS.textSecondary, marginTop: 2 },
   modalCancel: {
     alignItems: 'center',

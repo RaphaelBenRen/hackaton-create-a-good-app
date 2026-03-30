@@ -8,7 +8,7 @@ const AnimatedButton = ({
   text, onPress, variant = 'primary', style, disabled = false,
   accessibilityLabel, accessibilityHint,
 }) => {
-  const { scaledSize } = useApp();
+  const { scaledSize, colors } = useApp();
   const isPrimary = variant === 'primary';
 
   return (
@@ -31,13 +31,17 @@ const AnimatedButton = ({
       <LinearGradient
         colors={isPrimary
           ? [COLORS.primary, COLORS.secondary]
-          : [COLORS.glassBackground, COLORS.glassBackground]
+          : [colors.glassBackground, colors.glassBackground]
         }
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         style={[styles.gradient, !isPrimary && styles.secondaryBorder]}
       >
-        <Text style={[styles.text, { fontSize: scaledSize(16) }]}>{text}</Text>
+        <Text style={[
+          styles.text, 
+          { fontSize: scaledSize(16) },
+          !isPrimary && { color: colors.text }
+        ]}>{text}</Text>
       </LinearGradient>
     </TouchableOpacity>
   );
@@ -49,7 +53,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16, paddingHorizontal: 24,
     alignItems: 'center', justifyContent: 'center',
   },
-  secondaryBorder: { borderWidth: 1, borderColor: COLORS.glassBorder },
+  secondaryBorder: { borderWidth: 1 },
   text: { color: '#fff', fontWeight: 'bold', letterSpacing: 1 },
   disabled: { opacity: 0.5 },
 });

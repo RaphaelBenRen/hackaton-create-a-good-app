@@ -267,7 +267,7 @@ const CreateOfferScreen = () => {
             style={[styles.dynamicInput, { flex: 1, marginBottom: 0, justifyContent: 'center', backgroundColor: 'transparent', minHeight: 40, padding: 0 }]} 
             onPress={() => { setModalVisible(true); setSearch(''); }}
           >
-            <Text style={{ color: value ? (isDarkMode ? '#fff' : colors.text) : colors.textTertiary, fontSize: scaledSize(14) }}>
+            <Text style={{ color: value ? colors.text : colors.textTertiary, fontSize: scaledSize(14) }}>
               {value || placeholder}
             </Text>
           </TouchableOpacity>
@@ -283,7 +283,7 @@ const CreateOfferScreen = () => {
           style={[styles.input, { justifyContent: 'center' }]} 
           onPress={() => { setModalVisible(true); setSearch(''); }}
         >
-          <Text style={{ color: value ? (isDarkMode ? '#fff' : colors.text) : colors.textTertiary, fontSize: scaledSize(16) }}>
+          <Text style={{ color: value ? colors.text : colors.textTertiary, fontSize: scaledSize(16) }}>
             {value || placeholder}
           </Text>
         </TouchableOpacity>
@@ -298,11 +298,11 @@ const CreateOfferScreen = () => {
         <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
-            style={styles.backButton}
+            style={[styles.backButton, { backgroundColor: 'rgba(120,120,120,0.1)', borderColor: colors.glassBorder }]}
             accessibilityRole="button"
             accessibilityLabel={t('back')}
           >
-            <Feather name="chevron-left" size={24} color={isDarkMode ? "#fff" : colors.text} />
+            <Feather name="chevron-left" size={24} color={colors.text} />
           </TouchableOpacity>
           <Text style={[styles.headerTitle, { fontSize: scaledSize(17) }]}>
             {t('createOffer')}
@@ -331,7 +331,7 @@ const CreateOfferScreen = () => {
                 <Feather
                   name={pdfFile ? 'check-circle' : 'upload-cloud'}
                   size={28}
-                  color={pdfFile ? colors.success : (isDarkMode ? '#fff' : colors.text)}
+                  color={pdfFile ? colors.success : colors.text}
                 />
               )}
               <Text style={[styles.uploadText, { fontSize: scaledSize(15) }]}>
@@ -504,23 +504,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center', alignItems: 'center',
     borderWidth: 1, borderColor: COLORS.glassBorder,
   },
-  headerTitle: { fontWeight: '600', color: '#fff', flex: 1, textAlign: 'center' },
+  headerTitle: { fontWeight: '600', flex: 1, textAlign: 'center' },
   scroll: { paddingHorizontal: 20, paddingBottom: 40 },
-  label: { fontWeight: '600', color: '#fff', marginBottom: 8, marginTop: 16 },
+  label: { fontWeight: '600', marginBottom: 8, marginTop: 16 },
   input: {
-    backgroundColor: 'rgba(255,255,255,0.05)',
-    borderRadius: 16, padding: 15, color: '#fff',
+    backgroundColor: 'rgba(120,120,120,0.05)',
+    borderRadius: 16, padding: 15,
     borderWidth: 1, borderColor: COLORS.glassBorder, minHeight: 48,
   },
   multiline: { minHeight: 120, textAlignVertical: 'top', borderRadius: 12 },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   chip: {
     paddingHorizontal: 16, paddingVertical: 10, borderRadius: 20,
-    backgroundColor: 'rgba(255,255,255,0.05)',
+    backgroundColor: 'rgba(120,120,120,0.05)',
     borderWidth: 1, borderColor: COLORS.glassBorder, minHeight: 44, justifyContent: 'center',
   },
   chipActive: { backgroundColor: COLORS.primary, borderColor: COLORS.accent },
-  chipText: { color: 'rgba(255,255,255,0.85)' },
+  chipText: { color: COLORS.textSecondary },
   chipTextActive: { color: '#fff', fontWeight: 'bold' },
   dateButton: {
     flexDirection: 'row', alignItems: 'center', gap: 12,
@@ -528,7 +528,7 @@ const styles = StyleSheet.create({
     borderRadius: 16, padding: 15, minHeight: 48,
     borderWidth: 1, borderColor: COLORS.glassBorder,
   },
-  dateText: { color: '#fff' },
+  dateText: { color: COLORS.text },
   dateModalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.7)', justifyContent: 'flex-end' },
   dateModalContent: { backgroundColor: COLORS.secondary, borderTopLeftRadius: 20, borderTopRightRadius: 20, paddingBottom: 30 },
   dateModalHeader: { flexDirection: 'row', justifyContent: 'space-between', padding: 16, borderBottomWidth: 1, borderBottomColor: COLORS.glassBorder },
@@ -536,17 +536,17 @@ const styles = StyleSheet.create({
   dateModalDone: { color: COLORS.accent, fontSize: 16, fontWeight: '600' },
   uploadButton: {
     alignItems: 'center', justifyContent: 'center', paddingVertical: 24, borderRadius: 16,
-    borderWidth: 2, borderColor: COLORS.accent, borderStyle: 'dashed', backgroundColor: 'rgba(255,255,255,0.05)'
+    borderWidth: 2, borderColor: COLORS.accent, borderStyle: 'dashed', backgroundColor: 'rgba(120,120,120,0.05)'
   },
-  uploadButtonDone: { borderColor: COLORS.success, borderStyle: 'solid', backgroundColor: 'rgba(0,184,148,0.08)' },
-  uploadText: { color: '#fff', fontWeight: '600', marginTop: 10, textAlign: 'center' },
+  uploadButtonDone: { borderColor: COLORS.success, borderStyle: 'solid', backgroundColor: 'rgba(120,120,120,0.08)' },
+  uploadText: { fontWeight: '600', marginTop: 10, textAlign: 'center' },
   dynamicBox: {
     backgroundColor: 'rgba(0,0,0,0.2)', padding: 12, borderRadius: 12, marginBottom: 12,
     borderWidth: 1, borderColor: 'rgba(255,255,255,0.05)',
   },
   dynamicInput: {
-    backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: 10, padding: 10,
-    color: '#fff', marginBottom: 6, fontSize: 14,
+    backgroundColor: 'rgba(120,120,120,0.05)', borderRadius: 10, padding: 10,
+    marginBottom: 6, fontSize: 14,
   },
   addBtn: {
     flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 12,

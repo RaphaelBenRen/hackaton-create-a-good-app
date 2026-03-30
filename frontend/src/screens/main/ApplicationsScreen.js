@@ -344,7 +344,7 @@ const ApplicationsScreen = () => {
           renderItem={renderItem}
           contentContainerStyle={styles.list}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#fff" />
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.accent} />
           }
           ListEmptyComponent={<EmptyState />}
         />
@@ -361,7 +361,7 @@ const styles = StyleSheet.create({
     paddingTop: 8,
     paddingBottom: 12,
   },
-  headerTitle: { fontWeight: '700', color: '#fff' },
+  headerTitle: { fontWeight: '700' },
 
   /* tabs */
   tabsContainer: {
@@ -374,7 +374,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 8,
     borderRadius: 20,
-    backgroundColor: 'rgba(255,255,255,0.05)',
+    backgroundColor: 'rgba(120,120,120,0.05)',
     borderWidth: 1,
     borderColor: COLORS.glassBorder,
     minHeight: 44,
@@ -384,7 +384,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.accent,
     borderColor: COLORS.accent,
   },
-  tabText: { color: COLORS.textSecondary },
+  tabText: { fontWeight: '500' },
   tabTextActive: { color: '#fff', fontWeight: 'bold' },
 
   /* list */
@@ -401,9 +401,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   cardInfo: { flex: 1, marginLeft: 14 },
-  cardTitle: { fontWeight: '600', color: '#fff' },
-  cardSecondary: { color: COLORS.textSecondary, marginTop: 3 },
-  dateText: { color: COLORS.textTertiary, marginTop: 4 },
+  cardTitle: { fontWeight: '600' },
+  cardSecondary: { marginTop: 3 },
+  dateText: { marginTop: 4 },
   statusBadge: { paddingHorizontal: 12, paddingVertical: 6, borderRadius: 12, marginLeft: 8 },
   statusBadgeText: { fontWeight: '600' },
 
@@ -420,24 +420,26 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingVertical: 10,
     borderRadius: 10,
-    backgroundColor: 'rgba(255,255,255,0.05)',
+    backgroundColor: 'rgba(120,120,120,0.05)',
     alignItems: 'center',
     justifyContent: 'center',
   },
   actionBtnText: { fontWeight: '600' },
   chatBtn: {
-    backgroundColor: `${COLORS.accent}15`,
+    backgroundColor: COLORS.accent + '15',
   },
   coverLetterBox: {
-    backgroundColor: 'rgba(255,255,255,0.05)',
+    backgroundColor: 'rgba(0,0,0,0.1)',
     padding: 12,
     borderRadius: 8,
     marginBottom: 10,
+    borderWidth: 1,
+    borderColor: COLORS.glassBorder,
   },
   viewCvBtn: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: `${COLORS.info}20`,
+    backgroundColor: COLORS.info + '20',
     paddingVertical: 10,
     paddingHorizontal: 14,
     borderRadius: 8,
@@ -446,8 +448,8 @@ const styles = StyleSheet.create({
 
   /* empty */
   empty: { alignItems: 'center', padding: 30, marginTop: 40 },
-  emptyTitle: { fontWeight: 'bold', color: '#fff', marginTop: 16, marginBottom: 8, textAlign: 'center' },
-  emptyDesc: { color: COLORS.textSecondary, textAlign: 'center' },
+  emptyTitle: { fontWeight: 'bold', marginTop: 16, marginBottom: 8, textAlign: 'center' },
+  emptyDesc: { textAlign: 'center' },
 });
 
 export default ApplicationsScreen;

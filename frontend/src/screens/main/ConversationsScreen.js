@@ -173,7 +173,7 @@ const ConversationsScreen = () => {
         <View style={[styles.header, { paddingTop: insets.top > 0 ? 16 : 20 }]}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
-            style={[styles.backBtn, { backgroundColor: 'rgba(255,255,255,0.1)', borderColor: colors.glassBorder }]}
+            style={[styles.backBtn, { backgroundColor: 'rgba(120,120,120,0.1)', borderColor: colors.glassBorder }]}
             accessibilityRole="button"
             accessibilityLabel={t('back')}
           >
@@ -224,7 +224,6 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontWeight: '700',
-    color: '#fff',
   },
   convRow: {
     flexDirection: 'row',
@@ -255,12 +254,10 @@ const styles = StyleSheet.create({
   },
   convName: {
     fontWeight: '600',
-    color: '#fff',
     flex: 1,
     marginRight: 8,
   },
   convTime: {
-    color: COLORS.textTertiary,
   },
   offerTag: {
     color: COLORS.accent,
@@ -272,7 +269,6 @@ const styles = StyleSheet.create({
   },
   emptyTitle: {
     fontWeight: 'bold',
-    color: '#fff',
     marginTop: 16,
     marginBottom: 8,
     textAlign: 'center',

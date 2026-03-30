@@ -129,7 +129,7 @@ const CompanyProfileScreen = () => {
                     <TouchableOpacity onPress={() => setModalVisible(false)}><Feather name="x" size={24} color={colors.error} /></TouchableOpacity>
                  </View>
 
-                 <Text style={{ color: 'rgba(255,255,255,0.7)', fontSize: 13, marginBottom: 10 }}>Sélectionnez dans la liste ou tapez pour ajouter  👇</Text>
+                 <Text style={{ color: colors.textSecondary, fontSize: 13, marginBottom: 10 }}>Sélectionnez dans la liste ou tapez pour ajouter  👇</Text>
                  
                  <TextInput 
                    style={[styles.input, { marginBottom: 15, borderColor: colors.accent, borderWidth: 2, color: colors.text }]} 
@@ -186,7 +186,7 @@ const CompanyProfileScreen = () => {
           {/* Identité */}
           <GlassCard style={styles.card}>
             <View style={styles.sectionHeader}>
-              <Feather name="briefcase" size={16} color="#fff" />
+              <Feather name="briefcase" size={16} color={colors.text} />
               <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>
                 Identité de l'entreprise
               </Text>
@@ -219,7 +219,7 @@ const CompanyProfileScreen = () => {
           {/* À propos */}
           <GlassCard style={styles.card}>
             <View style={styles.sectionHeader}>
-              <Feather name="info" size={16} color="#fff" />
+              <Feather name="info" size={16} color={colors.text} />
               <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>
                 À propos
               </Text>
@@ -263,7 +263,7 @@ const CompanyProfileScreen = () => {
           {/* Contact */}
           <GlassCard style={styles.card}>
             <View style={styles.sectionHeader}>
-              <Feather name="mail" size={16} color="#fff" />
+              <Feather name="mail" size={16} color={colors.text} />
               <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>
                 Contact
               </Text>
@@ -316,25 +316,16 @@ const CompanyProfileScreen = () => {
 const styles = StyleSheet.create({
   flex: { flex: 1 },
   scroll: { padding: 20, paddingTop: 60, paddingBottom: 40 },
-  title: { fontWeight: 'bold', color: '#fff' },
-  subtitle: { color: 'rgba(255,255,255,0.85)', marginTop: 4, marginBottom: 4 },
-  card: { marginTop: 20, padding: 20 },
-  sectionHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-    marginBottom: 12,
-  },
-  sectionTitle: { fontWeight: '700', color: '#fff' },
-  label: { fontWeight: '600', color: '#fff', marginBottom: 8, marginTop: 16 },
+  title: { fontWeight: 'bold' },
+  subtitle: { marginTop: 4, marginBottom: 4 },
+  card: { marginTop: 20, padding: 26 },
+  sectionHeader: { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 8, marginTop: 10 },
+  sectionTitle: { fontWeight: '700' },
+  label: { fontWeight: '600', marginBottom: 8, marginTop: 16 },
   input: {
-    backgroundColor: 'rgba(255,255,255,0.05)',
-    borderRadius: 16,
-    padding: 15,
-    color: '#fff',
-    borderWidth: 1,
-    borderColor: COLORS.glassBorder,
-    minHeight: 48,
+    backgroundColor: 'rgba(120,120,120,0.05)',
+    borderRadius: 16, padding: 15,
+    borderWidth: 1, borderColor: COLORS.glassBorder, minHeight: 48,
   },
   multiline: {
     height: 120,
@@ -343,17 +334,12 @@ const styles = StyleSheet.create({
   },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   chip: {
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderRadius: 20,
-    backgroundColor: 'rgba(255,255,255,0.05)',
-    borderWidth: 1,
-    borderColor: COLORS.glassBorder,
-    minHeight: 44,
-    justifyContent: 'center',
+    paddingHorizontal: 16, paddingVertical: 10, borderRadius: 20,
+    backgroundColor: 'rgba(120,120,120,0.05)', borderWidth: 1, borderColor: COLORS.glassBorder,
+    minHeight: 44, justifyContent: 'center',
   },
   chipActive: { backgroundColor: COLORS.primary, borderColor: COLORS.accent },
-  chipText: { color: 'rgba(255,255,255,0.85)' },
+  chipText: { fontWeight: '500' },
   chipTextActive: { color: '#fff', fontWeight: 'bold' },
   saveContainer: { marginTop: 24, marginBottom: 20 },
   logoutBtn: {

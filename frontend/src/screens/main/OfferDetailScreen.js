@@ -157,7 +157,7 @@ const OfferDetailScreen = ({ route }) => {
           accessibilityRole="button"
           accessibilityLabel={t('back') || 'Back'}
         >
-          <Feather name="chevron-left" size={24} color={isDarkMode ? "#fff" : colors.text} />
+          <Feather name="chevron-left" size={24} color={colors.text} />
         </TouchableOpacity>
         <Text style={[styles.headerTitle, { fontSize: scaledSize(22) }]} accessibilityRole="header">
           {t('offerDetails')}
@@ -170,7 +170,7 @@ const OfferDetailScreen = ({ route }) => {
           accessibilityLabel={isSpeaking ? 'Arrêter la lecture' : "Lire l'offre à voix haute"}
           accessibilityHint="Lit les détails de l'offre à voix haute grâce au synthétiseur vocal"
         >
-          <Feather name={isSpeaking ? 'volume-x' : 'volume-2'} size={20} color={isSpeaking ? colors.accent : (isDarkMode ? '#fff' : colors.text)} />
+          <Feather name={isSpeaking ? 'volume-x' : 'volume-2'} size={20} color={isSpeaking ? colors.accent : colors.text} />
         </TouchableOpacity>
       </View>
 
@@ -406,13 +406,13 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 22,
-    backgroundColor: 'rgba(255,255,255,0.1)',
+    backgroundColor: 'rgba(120,120,120,0.1)',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  headerTitle: { fontWeight: '700', color: '#fff', flex: 1, textAlign: 'center' },
+  headerTitle: { fontWeight: '700', flex: 1, textAlign: 'center' },
   scroll: { paddingHorizontal: 20, paddingBottom: 40 },
-  offerTitle: { fontWeight: 'bold', color: '#fff', marginBottom: 12 },
+  offerTitle: { fontWeight: 'bold', marginBottom: 12 },
   badgeRow: { flexDirection: 'row', marginBottom: 14 },
   typeBadge: {
     paddingHorizontal: 14,
@@ -424,21 +424,21 @@ const styles = StyleSheet.create({
   metaRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 6 },
   metaText: { color: COLORS.textSecondary },
   section: { marginTop: 14 },
-  sectionTitle: { fontWeight: '700', color: '#fff', marginBottom: 10 },
+  sectionTitle: { fontWeight: '700', marginBottom: 10 },
   bodyText: { color: COLORS.textSecondary, lineHeight: 22 },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   skillChip: {
     paddingHorizontal: 14,
     paddingVertical: 8,
     borderRadius: 20,
-    backgroundColor: 'rgba(255,255,255,0.05)',
+    backgroundColor: 'rgba(120,120,120,0.05)',
     borderWidth: 1,
     borderColor: COLORS.glassBorder,
   },
-  skillChipText: { color: '#fff' },
+  skillChipText: { fontWeight: '500' },
   infoRow: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 12 },
-  infoText: { color: '#fff', fontWeight: '500' },
-  companyName: { fontWeight: '600', color: '#fff', marginBottom: 6 },
+  infoText: { fontWeight: '500' },
+  companyName: { fontWeight: '600', marginBottom: 6 },
   applySection: { marginTop: 20 },
   cvButton: {
     flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8,
@@ -456,7 +456,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 8,
   },
-  modalTitle: { fontWeight: '700', color: '#fff' },
+  modalTitle: { fontWeight: '700' },
   closeButton: {
     width: 44,
     height: 44,
@@ -464,13 +464,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  label: { fontWeight: '600', color: '#fff', marginBottom: 8, marginTop: 16 },
+  label: { fontWeight: '600', marginBottom: 8, marginTop: 16 },
   input: {
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    backgroundColor: 'rgba(120,120,120,0.05)',
     borderRadius: 16,
     padding: 15,
     fontSize: 16,
-    color: '#fff',
     borderWidth: 1,
     borderColor: COLORS.glassBorder,
   },

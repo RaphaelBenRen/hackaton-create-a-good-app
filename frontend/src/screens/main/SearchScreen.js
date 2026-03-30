@@ -116,7 +116,7 @@ const SearchScreen = () => {
         accessibilityLabel={`${item.title}, ${item.companies?.company_name || ''}, ${item.location || ''}`}
       >
         <View style={styles.iconBox}>
-          <Feather name="briefcase" size={22} color="#fff" />
+          <Feather name="briefcase" size={22} color={colors.text} />
         </View>
         <View style={styles.cardInfo}>
           <Text style={[styles.cardTitle, { fontSize: scaledSize(16) }]} numberOfLines={1}>
@@ -371,14 +371,14 @@ const SearchScreen = () => {
 
 const styles = StyleSheet.create({
   header: { paddingBottom: 8, paddingHorizontal: 20, paddingTop: 8 },
-  title: { fontWeight: '700', color: '#fff' },
+  title: { fontWeight: '700' },
 
   /* search bar */
   searchContainer: { paddingHorizontal: 20, marginBottom: 12 },
   searchBox: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(255,255,255,0.05)',
+    backgroundColor: 'rgba(120,120,120,0.05)',
     borderRadius: 20,
     paddingHorizontal: 16,
     paddingVertical: 12,
@@ -386,7 +386,7 @@ const styles = StyleSheet.create({
     borderColor: COLORS.glassBorder,
     gap: 10,
   },
-  searchInput: { flex: 1, color: '#fff' },
+  searchInput: { flex: 1 },
   clearBtn: { width: 44, height: 44, justifyContent: 'center', alignItems: 'center' },
 
   /* filters */
@@ -395,7 +395,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 20,
-    backgroundColor: 'rgba(255,255,255,0.05)',
+    backgroundColor: 'rgba(120,120,120,0.05)',
     borderWidth: 1,
     borderColor: COLORS.glassBorder,
     minHeight: 44,
@@ -412,7 +412,7 @@ const styles = StyleSheet.create({
   cityFilterBox: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(255,255,255,0.05)',
+    backgroundColor: 'rgba(120,120,120,0.05)',
     borderRadius: 12,
     paddingHorizontal: 14,
     paddingVertical: 10,
@@ -420,7 +420,7 @@ const styles = StyleSheet.create({
     borderColor: COLORS.glassBorder,
     gap: 8,
   },
-  cityInput: { flex: 1, color: '#fff' },
+  cityInput: { flex: 1 },
 
   /* results list */
   list: { paddingHorizontal: 20, paddingBottom: 100 },
@@ -432,12 +432,12 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 12,
-    backgroundColor: 'rgba(255,255,255,0.1)',
+    backgroundColor: 'rgba(120,120,120,0.1)',
     justifyContent: 'center',
     alignItems: 'center',
   },
   cardInfo: { flex: 1, marginLeft: 14 },
-  cardTitle: { fontWeight: '600', color: '#fff' },
+  cardTitle: { fontWeight: '600' },
   cardSecondary: { color: COLORS.textSecondary, marginTop: 3 },
 
   /* type chip */
@@ -451,11 +451,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: 6,
-    backgroundColor: 'rgba(255,255,255,0.08)',
+    backgroundColor: 'rgba(120,120,120,0.05)',
     borderWidth: 1,
     borderColor: COLORS.glassBorder,
   },
-  skillChipText: { color: COLORS.textSecondary, fontWeight: '500' },
+  skillChipText: { fontWeight: '500' },
 
   /* info line */
   infoLine: { color: COLORS.textTertiary, marginTop: 6 },
@@ -472,19 +472,19 @@ const styles = StyleSheet.create({
 
   /* empty */
   empty: { alignItems: 'center', padding: 30, marginTop: 40 },
-  emptyTitle: { fontWeight: 'bold', color: '#fff', marginTop: 16, marginBottom: 8 },
-  emptyDesc: { color: COLORS.textSecondary, textAlign: 'center' },
+  emptyTitle: { fontWeight: 'bold', marginTop: 16, marginBottom: 8 },
+  emptyDesc: { textAlign: 'center' },
 
   /* modal */
   modalBg: { flex: 1, backgroundColor: 'rgba(0,0,0,0.7)', justifyContent: 'center', padding: 20 },
   modalContainer: { backgroundColor: COLORS.glassBackground, borderRadius: 16, padding: 20, borderWidth: 1, borderColor: COLORS.glassBorder },
-  modalTitle: { color: '#fff', fontWeight: 'bold', marginBottom: 16, textAlign: 'center' },
-  modalItem: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 14, borderBottomWidth: 1, borderBottomColor: 'rgba(255,255,255,0.05)' },
-  modalItemActive: { backgroundColor: 'rgba(255,255,255,0.02)' },
-  modalItemText: { color: COLORS.textSecondary, fontSize: 16 },
-  modalItemTextActive: { color: '#fff', fontWeight: 'bold' },
-  modalCloseBtn: { marginTop: 20, padding: 14, alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: 12 },
-  modalCloseText: { color: '#fff', fontWeight: 'bold' }
+  modalTitle: { fontWeight: 'bold', marginBottom: 16, textAlign: 'center' },
+  modalItem: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 14, borderBottomWidth: 1 },
+  modalItemActive: { backgroundColor: 'rgba(120,120,120,0.05)' },
+  modalItemText: { fontSize: 16 },
+  modalItemTextActive: { fontWeight: 'bold' },
+  modalCloseBtn: { marginTop: 20, padding: 14, alignItems: 'center', backgroundColor: 'rgba(120,120,120,0.1)', borderRadius: 12 },
+  modalCloseText: { fontWeight: 'bold' }
 });
 
 export default SearchScreen;

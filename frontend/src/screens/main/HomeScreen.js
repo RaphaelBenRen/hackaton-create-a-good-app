@@ -129,7 +129,7 @@ const HomeScreen = () => {
         accessibilityLabel={item.title}
       >
         <View style={styles.iconBox}>
-          <Feather name="briefcase" size={22} color="#fff" />
+          <Feather name="briefcase" size={22} color={colors.text} />
         </View>
         <View style={styles.cardInfo}>
           <Text style={[styles.cardTitle, { fontSize: scaledSize(16), color: colors.text }]} numberOfLines={1}>{item.title}</Text>
@@ -246,7 +246,7 @@ const HomeScreen = () => {
         accessibilityLabel={item.title}
       >
         <View style={styles.iconBox}>
-          <Feather name="briefcase" size={22} color="#fff" />
+          <Feather name="briefcase" size={22} color={colors.text} />
         </View>
         <View style={styles.cardInfo}>
           <Text style={[styles.cardTitle, { fontSize: scaledSize(16), color: colors.text }]} numberOfLines={1}>{item.title}</Text>
@@ -378,7 +378,7 @@ const HomeScreen = () => {
           renderItem={renderItem}
           contentContainerStyle={styles.list}
           ListEmptyComponent={emptyComponent}
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#fff" />}
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.accent} />}
         />
       </SafeAreaView>
     </GradientBackground>
@@ -388,11 +388,11 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20, paddingTop: 8, paddingBottom: 12 },
   headerLeft: { flex: 1 },
-  headerTitle: { fontWeight: '700', color: '#fff' },
-  headerSub: { color: COLORS.textSecondary, marginTop: 2 },
+  headerTitle: { fontWeight: '700' },
+  headerSub: { marginTop: 2 },
   headerBtn: {
     width: 44, height: 44, borderRadius: 22,
-    backgroundColor: 'rgba(255,255,255,0.1)', justifyContent: 'center', alignItems: 'center',
+    backgroundColor: 'rgba(120,120,120,0.1)', justifyContent: 'center', alignItems: 'center',
     borderWidth: 1, borderColor: COLORS.glassBorder,
   },
   // Sub-tabs for company
@@ -400,31 +400,31 @@ const styles = StyleSheet.create({
   tab: {
     flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6,
     paddingVertical: 10, borderRadius: 12,
-    backgroundColor: 'rgba(255,255,255,0.05)', borderWidth: 1, borderColor: COLORS.glassBorder,
+    backgroundColor: 'rgba(120,120,120,0.05)', borderWidth: 1, borderColor: COLORS.glassBorder,
     minHeight: 44,
   },
   tabActive: { backgroundColor: COLORS.primary, borderColor: COLORS.accent },
-  tabText: { color: COLORS.textTertiary, fontWeight: '500' },
+  tabText: { fontWeight: '500' },
   tabTextActive: { color: '#fff', fontWeight: '700' },
 
   list: { paddingHorizontal: 20, paddingTop: 6, paddingBottom: 100 },
   card: { marginBottom: 14 },
   cardBody: { flexDirection: 'row', padding: 14, alignItems: 'flex-start' },
-  iconBox: { width: 44, height: 44, borderRadius: 12, backgroundColor: 'rgba(255,255,255,0.1)', justifyContent: 'center', alignItems: 'center' },
+  iconBox: { width: 44, height: 44, borderRadius: 12, backgroundColor: 'rgba(120,120,120,0.1)', justifyContent: 'center', alignItems: 'center' },
   cardInfo: { flex: 1, marginLeft: 12 },
-  cardTitle: { fontWeight: '600', color: '#fff' },
+  cardTitle: { fontWeight: '600' },
   cardSub: { color: COLORS.textSecondary, marginTop: 2 },
   chipRow: { flexDirection: 'row', marginTop: 6, flexWrap: 'wrap', gap: 4 },
   typeChip: { paddingHorizontal: 8, paddingVertical: 4, borderRadius: 8, flexShrink: 1 },
   typeChipText: { fontWeight: '600' },
   skillsRow: { flexDirection: 'row', flexWrap: 'wrap', marginTop: 6, gap: 4 },
-  skillChip: { paddingHorizontal: 7, paddingVertical: 2, borderRadius: 6, backgroundColor: 'rgba(255,255,255,0.08)', borderWidth: 1, borderColor: COLORS.glassBorder },
-  skillChipText: { color: COLORS.textSecondary, fontWeight: '500' },
-  infoLine: { color: COLORS.textTertiary, marginTop: 4 },
+  skillChip: { paddingHorizontal: 7, paddingVertical: 2, borderRadius: 6, backgroundColor: 'rgba(120,120,120,0.05)', borderWidth: 1, borderColor: COLORS.glassBorder },
+  skillChipText: { fontWeight: '500' },
+  infoLine: { marginTop: 4 },
   actionBar: { flexDirection: 'row', borderTopWidth: 1, borderTopColor: COLORS.glassBorder, padding: 8, gap: 8 },
-  actionBtn: { flex: 1, flexDirection: 'row', paddingVertical: 10, borderRadius: 10, backgroundColor: 'rgba(255,255,255,0.05)', alignItems: 'center', justifyContent: 'center', minHeight: 44 },
+  actionBtn: { flex: 1, flexDirection: 'row', paddingVertical: 10, borderRadius: 10, backgroundColor: 'rgba(120,120,120,0.05)', alignItems: 'center', justifyContent: 'center', minHeight: 44 },
   actionBtnPrimary: { backgroundColor: COLORS.accent },
-  actionBtnText: { fontWeight: '600', color: '#fff' },
+  actionBtnText: { fontWeight: '600' },
   avatarWrap: { width: 48, height: 48, borderRadius: 24, overflow: 'hidden' },
   avatar: { width: 48, height: 48, justifyContent: 'center', alignItems: 'center' },
   avatarText: { fontWeight: '700', color: '#fff' },
@@ -432,8 +432,8 @@ const styles = StyleSheet.create({
   statusDot: { width: 8, height: 8, borderRadius: 4 },
   statusLabel: { fontWeight: '500' },
   empty: { alignItems: 'center', padding: 30, marginTop: 40 },
-  emptyTitle: { fontWeight: 'bold', color: '#fff', marginTop: 16, marginBottom: 8, textAlign: 'center' },
-  emptyDesc: { color: COLORS.textSecondary, textAlign: 'center' },
+  emptyTitle: { fontWeight: 'bold', marginTop: 16, marginBottom: 8, textAlign: 'center' },
+  emptyDesc: { textAlign: 'center' },
 });
 
 export default HomeScreen;

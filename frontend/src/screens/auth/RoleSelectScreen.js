@@ -145,12 +145,10 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: '700',
-    color: '#fff',
     textAlign: 'center',
     lineHeight: 30,
   },
   subtitle: {
-    color: 'rgba(255,255,255,0.85)',
     marginTop: 10,
     textAlign: 'center',
     lineHeight: 22,
@@ -170,7 +168,7 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 16,
-    backgroundColor: 'rgba(255,255,255,0.1)',
+    backgroundColor: 'rgba(120,120,120,0.1)',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -184,11 +182,9 @@ const styles = StyleSheet.create({
   },
   roleTitle: {
     fontWeight: '700',
-    color: '#fff',
     marginBottom: 4,
   },
   roleDesc: {
-    color: 'rgba(255,255,255,0.85)',
     lineHeight: 20,
   },
   radio: {
@@ -196,7 +192,6 @@ const styles = StyleSheet.create({
     height: 26,
     borderRadius: 13,
     borderWidth: 2,
-    borderColor: 'rgba(255,255,255,0.3)',
     justifyContent: 'center',
     alignItems: 'center',
   },

@@ -236,7 +236,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
                     <TouchableOpacity onPress={() => setModalVisible(false)}><Feather name="x" size={24} color={colors.error} /></TouchableOpacity>
                  </View>
 
-                 <Text style={{ color: 'rgba(255,255,255,0.7)', fontSize: 13, marginBottom: 10 }}>Sélectionnez dans la liste ou tapez pour ajouter  👇</Text>
+                 <Text style={{ color: colors.textSecondary, fontSize: 13, marginBottom: 10 }}>Sélectionnez dans la liste ou tapez pour ajouter  👇</Text>
                  
                  <TextInput 
                    style={[styles.input, { marginBottom: 15, borderColor: colors.accent, borderWidth: 2, color: colors.text }]} 
@@ -300,7 +300,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
           {/* 1. Identité */}
           <GlassCard style={styles.card}>
             <View style={styles.sectionHeader}>
-              <Feather name="user" size={16} color="#fff" />
+              <Feather name="user" size={16} color={colors.text} />
               <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>Identité</Text>
             </View>
             <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 0 }]}>{t('firstName')} *</Text>
@@ -319,8 +319,8 @@ const StudentProfileScreen = ({ route, navigation }) => {
               <Feather name="cpu" size={16} color={colors.accent} />
               <Text style={[styles.sectionTitle, { fontSize: scaledSize(16), color: colors.accent }]}>Import Intelligent (CV)</Text>
             </View>
-            <Text style={{ color: 'rgba(255,255,255,0.7)', marginBottom: 15, fontSize: scaledSize(13) }}>
-              Chargez votre CV : notre algorithme remplira automatiquement toutes vos expériences, formations, compétences et qualités ci-dessous !
+            <Text style={{ color: colors.textSecondary, marginBottom: 15, fontSize: scaledSize(13) }}>
+              {t('analyzeCVDesc')}
             </Text>
 
             <TouchableOpacity
@@ -358,7 +358,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
           {/* 4. Compétences & Qualités */}
           <GlassCard style={styles.card}>
             <View style={styles.sectionHeader}>
-              <Feather name="award" size={16} color="#fff" />
+              <Feather name="award" size={16} color={colors.text} />
               <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>Compétences & Soft Skills</Text>
             </View>
             
@@ -390,7 +390,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
           {/* 5. Expériences */}
           <GlassCard style={styles.card}>
             <View style={styles.sectionHeader}>
-              <Feather name="briefcase" size={16} color="#fff" />
+              <Feather name="briefcase" size={16} color={colors.text} />
               <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>Expériences pro</Text>
             </View>
             {experiences.map((exp, index) => (
@@ -412,7 +412,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
           {/* 6. Formations */}
           <GlassCard style={styles.card}>
             <View style={styles.sectionHeader}>
-              <Feather name="book-open" size={16} color="#fff" />
+              <Feather name="book-open" size={16} color={colors.text} />
               <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>Formations</Text>
             </View>
             {education.map((edu, index) => (
@@ -434,7 +434,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
           {/* Métier Recherché */}
           <GlassCard style={styles.card}>
             <View style={styles.sectionHeader}>
-              <Feather name="target" size={16} color="#fff" />
+              <Feather name="target" size={16} color={colors.text} />
               <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>Métier Recherché</Text>
             </View>
             
@@ -461,7 +461,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
           {/* 7. Préférences */}
           <GlassCard style={styles.card}>
             <View style={styles.sectionHeader}>
-              <Feather name="search" size={16} color="#fff" />
+              <Feather name="search" size={16} color={colors.text} />
               <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>Préférences de recherche</Text>
             </View>
             <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 0 }]}>{t('searchStatus')}</Text>
@@ -473,7 +473,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
           {/* 8. Divers */}
           <GlassCard style={styles.card}>
              <View style={styles.sectionHeader}>
-               <Feather name="map-pin" size={16} color="#fff" />
+               <Feather name="map-pin" size={16} color={colors.text} />
                <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>Localisation</Text>
              </View>
              
@@ -507,47 +507,47 @@ const StudentProfileScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   flex: { flex: 1 },
   scroll: { padding: 20, paddingTop: 60, paddingBottom: 40 },
-  title: { fontWeight: 'bold', color: '#fff' },
-  subtitle: { color: 'rgba(255,255,255,0.85)', marginTop: 4, marginBottom: 4 },
+  title: { fontWeight: 'bold' },
+  subtitle: { marginTop: 4, marginBottom: 4 },
   card: { marginTop: 20, padding: 20 },
   sectionHeader: { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 12 },
-  sectionTitle: { fontWeight: '700', color: '#fff' },
-  label: { fontWeight: '600', color: '#fff', marginBottom: 8, marginTop: 16 },
+  sectionTitle: { fontWeight: '700' },
+  label: { fontWeight: '600', marginBottom: 8, marginTop: 16 },
   input: {
-    backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: 16, padding: 15,
-    color: '#fff', borderWidth: 1, borderColor: COLORS.glassBorder, minHeight: 48,
+    backgroundColor: 'rgba(120,120,120,0.05)', borderRadius: 16, padding: 15,
+    borderWidth: 1, borderColor: COLORS.glassBorder, minHeight: 48,
   },
   multiline: { height: 100, borderRadius: 12, textAlignVertical: 'top' },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   chip: {
     paddingHorizontal: 16, paddingVertical: 10, borderRadius: 20,
-    backgroundColor: 'rgba(255,255,255,0.05)', borderWidth: 1, borderColor: COLORS.glassBorder,
+    backgroundColor: 'rgba(120,120,120,0.05)', borderWidth: 1, borderColor: COLORS.glassBorder,
     minHeight: 44, justifyContent: 'center',
   },
   chipActive: { backgroundColor: COLORS.primary, borderColor: COLORS.accent },
-  chipText: { color: 'rgba(255,255,255,0.85)' },
+  chipText: { fontWeight: '500' },
   chipTextActive: { color: '#fff', fontWeight: 'bold' },
   dateModalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.8)', justifyContent: 'flex-end' },
   dateModalContent: { backgroundColor: COLORS.secondary, borderTopLeftRadius: 20, borderTopRightRadius: 20, paddingBottom: 30 },
   uploadButton: {
     alignItems: 'center', justifyContent: 'center', paddingVertical: 24, borderRadius: 16,
-    borderWidth: 2, borderColor: COLORS.accent, borderStyle: 'dashed', backgroundColor: 'rgba(255,255,255,0.05)'
+    borderWidth: 2, borderColor: COLORS.accent, borderStyle: 'dashed', backgroundColor: 'rgba(120,120,120,0.05)'
   },
   uploadButtonDone: { borderColor: COLORS.success, borderStyle: 'solid', backgroundColor: 'rgba(0,184,148,0.08)' },
-  uploadText: { color: '#fff', fontWeight: '600', marginTop: 10, textAlign: 'center' },
+  uploadText: { fontWeight: '600', marginTop: 10, textAlign: 'center' },
   removeFile: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10, gap: 6 },
   removeFileText: { color: COLORS.error, fontWeight: '600' },
   saveContainer: { marginTop: 24, marginBottom: 20 },
   logoutBtn: { alignItems: 'center', paddingVertical: 14, marginBottom: 40 },
   logoutText: { color: COLORS.error, fontWeight: '600', fontSize: 16 },
   dynamicBox: {
-    backgroundColor: 'rgba(0,0,0,0.2)',
+    backgroundColor: 'rgba(0,0,0,0.1)',
     padding: 12, borderRadius: 12, marginBottom: 12,
-    borderWidth: 1, borderColor: 'rgba(255,255,255,0.05)',
+    borderWidth: 1, borderColor: 'rgba(120,120,120,0.1)',
   },
   dynamicInput: {
-    backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: 10, padding: 10,
-    color: '#fff', marginBottom: 6, fontSize: 14,
+    backgroundColor: 'rgba(120,120,120,0.05)', borderRadius: 10, padding: 10,
+    marginBottom: 6, fontSize: 14,
   },
   addBtn: {
     flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 12,

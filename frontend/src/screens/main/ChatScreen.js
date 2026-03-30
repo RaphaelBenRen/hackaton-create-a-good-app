@@ -108,6 +108,7 @@ const ChatScreen = ({ route }) => {
   const isOwnMessage = (msg) => msg.sender_id === session?.user?.id;
 
   const formatTime = (dateStr) => {
+    if (!dateStr) return '';
     const date = new Date(dateStr);
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
@@ -119,7 +120,7 @@ const ChatScreen = ({ route }) => {
         <View
           style={[
             styles.msgBubble,
-            own ? [styles.msgBubbleOwn, { backgroundColor: colors.accent }] : [styles.msgBubbleOther, { backgroundColor: isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)', borderColor: colors.glassBorder }],
+            own ? [styles.msgBubbleOwn, { backgroundColor: colors.accent }] : [styles.msgBubbleOther, { backgroundColor: isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(120,120,120,0.1)', borderColor: colors.glassBorder }],
           ]}
           accessibilityRole="text"
         >
@@ -136,7 +137,7 @@ const ChatScreen = ({ route }) => {
 
   const renderDateSeparator = (date) => (
     <View style={styles.dateSeparator}>
-      <Text style={[styles.dateText, { color: colors.textTertiary, backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)' }]}>{date}</Text>
+      <Text style={[styles.dateText, { color: colors.textTertiary, backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(120,120,120,0.05)' }]}>{date}</Text>
     </View>
   );
 
@@ -147,12 +148,12 @@ const ChatScreen = ({ route }) => {
         <View style={[styles.header, { paddingTop: insets.top > 0 ? 8 : 16 }]}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
-            style={[styles.backBtn, { backgroundColor: isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)', borderColor: colors.glassBorder }]}
+            style={[styles.backBtn, { backgroundColor: isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(120,120,120,0.1)', borderColor: colors.glassBorder }]}
             accessibilityRole="button"
             accessibilityLabel={t('back')}
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           >
-            <Feather name="chevron-left" size={24} color={isDarkMode ? "#fff" : colors.primary} />
+            <Feather name="chevron-left" size={24} color={colors.text} />
           </TouchableOpacity>
           <View style={styles.headerInfo}>
             <View style={[styles.headerAvatar, { backgroundColor: colors.accent + '22', borderWidth: 1, borderColor: colors.accent + '44' }]}>
@@ -199,7 +200,7 @@ const ChatScreen = ({ route }) => {
             <TextInput
               style={[styles.input, { 
                 fontSize: scaledSize(15), 
-                backgroundColor: isDarkMode ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.05)',
+                backgroundColor: isDarkMode ? 'rgba(255,255,255,0.08)' : 'rgba(120,120,120,0.05)',
                 color: colors.text,
                 borderColor: colors.glassBorder
               }]}
@@ -245,11 +246,9 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: 'rgba(255,255,255,0.1)',
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: COLORS.glassBorder,
   },
   headerInfo: {
     flex: 1,
@@ -272,7 +271,6 @@ const styles = StyleSheet.create({
   },
   headerName: {
     fontWeight: '600',
-    color: '#fff',
     flex: 1,
   },
   msgRow: {
@@ -298,11 +296,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   msgText: {
-    color: '#fff',
     lineHeight: 21,
   },
   msgTime: {
-    color: 'rgba(255,255,255,0.5)',
+    color: 'rgba(150,150,150,0.6)',
     marginTop: 4,
     alignSelf: 'flex-end',
   },

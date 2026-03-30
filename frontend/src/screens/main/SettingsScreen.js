@@ -162,7 +162,7 @@ const SettingsScreen = () => {
                     accessibilityLabel={t('updateCV')}
                   >
                     <View style={styles.itemIcon}>
-                      <Feather name="upload" size={18} color="#fff" />
+                      <Feather name="upload" size={18} color={colors.text} />
                     </View>
                     <Text style={[styles.itemTitle, { flex: 1, fontSize: scaledSize(15), color: colors.text }]}>
                       {uploading ? t('loading') : t('updateCV')}
@@ -193,7 +193,7 @@ const SettingsScreen = () => {
                   accessibilityLabel={t('uploadCV')}
                 >
                   <View style={styles.itemIcon}>
-                    <Feather name="upload-cloud" size={18} color="#fff" />
+                    <Feather name="upload-cloud" size={18} color={colors.text} />
                   </View>
                   <View style={{ flex: 1 }}>
                     <Text style={[styles.itemTitle, { fontSize: scaledSize(15) }]}>
@@ -401,7 +401,7 @@ const SettingsScreen = () => {
 
 const styles = StyleSheet.create({
   scroll: { paddingHorizontal: 20, paddingBottom: 100 },
-  title: { fontWeight: '700', color: '#fff', marginBottom: 20 },
+  title: { fontWeight: '700', marginBottom: 20 },
   profileCard: {
     marginBottom: 10, padding: 20, borderRadius: 16,
     flexDirection: 'row', alignItems: 'center',
@@ -428,7 +428,7 @@ const styles = StyleSheet.create({
   itemBorder: { borderBottomWidth: 1 },
   itemIcon: {
     width: 36, height: 36, borderRadius: 10,
-    backgroundColor: 'rgba(255,255,255,0.1)',
+    backgroundColor: 'rgba(120,120,120,0.1)',
     justifyContent: 'center', alignItems: 'center', marginRight: 14,
   },
   itemTitle: { fontWeight: '500' },
@@ -436,7 +436,7 @@ const styles = StyleSheet.create({
   scaleRow: { flexDirection: 'row', gap: 8, padding: 12 },
   scaleBtn: {
     flex: 1, paddingVertical: 12, borderRadius: 10, alignItems: 'center',
-    backgroundColor: 'rgba(255,255,255,0.05)',
+    backgroundColor: 'rgba(120,120,120,0.05)',
     borderWidth: 1, minHeight: 44,
   },
   scaleBtnText: { fontWeight: '600' },
