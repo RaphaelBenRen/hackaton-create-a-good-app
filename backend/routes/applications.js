@@ -35,7 +35,7 @@ router.get('/company', authenticate, async (req, res) => {
 
   const { data, error } = await supabase
     .from('applications')
-    .select('*, offers(*), students:student_id(*)')
+    .select('*, offers(*), students(*)')
     .eq('company_id', company.id)
     .order('created_at', { ascending: false });
   if (error) return res.status(400).json({ error: error.message });

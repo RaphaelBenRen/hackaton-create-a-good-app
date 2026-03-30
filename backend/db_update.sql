@@ -20,3 +20,8 @@ COMMENT ON COLUMN public.students.target_job IS 'Le métier ciblé par l''étudi
 COMMENT ON COLUMN public.students.experiences IS 'Historique professionnel extrait du CV (JSON array)';
 COMMENT ON COLUMN public.students.education IS 'Parcours académique extrait du CV (JSON array)';
 COMMENT ON COLUMN public.students.qualities IS 'Qualités et soft skills extraits du CV';
+
+-- Ajout des colonnes pour les offres de stage au format PDF
+ALTER TABLE public.offers
+ADD COLUMN IF NOT EXISTS pdf_url VARCHAR(255);
+COMMENT ON COLUMN public.offers.pdf_url IS 'Lien vers le PDF original de l''offre importé par l''entreprise';
