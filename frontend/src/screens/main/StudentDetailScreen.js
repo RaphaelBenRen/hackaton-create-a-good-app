@@ -30,7 +30,7 @@ const StudentDetailScreen = ({ route }) => {
   const insets = useSafeAreaInsets();
 
   const [inviting, setInviting] = useState(false);
-  const [invited, setInvited] = useState(false);
+  const [invitedOffers, setInvitedOffers] = useState([]); // Array of offer IDs already invited
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [companyOffers, setCompanyOffers] = useState([]);
   const [showOfferPicker, setShowOfferPicker] = useState(false);
@@ -47,9 +47,10 @@ const StudentDetailScreen = ({ route }) => {
   const statusKey = student.search_status || 'active';
   const statusInfo = searchStatusConfig[statusKey] || searchStatusConfig.active;
 
-  // Fetch company offers for invite
+  // Fetch company offers for invite and check if already invited
   useEffect(() => {
     if (userRole === 'company' && profile?.id) {
+      // Fetch offers
       offersAPI.mine()
         .then((data) => {
           if (data) setCompanyOffers(data);
@@ -57,8 +58,15 @@ const StudentDetailScreen = ({ route }) => {
         .catch((err) => {
           toast.current?.show({ message: t('error'), subtext: err.message, type: 'error' });
         });
+      
+      // General check: fetch all offers this company has invited this student for
+      applicationsAPI.checkAsCompany(student.user_id || student.id)
+        .then(res => {
+          if (res.invitedOfferIds) setInvitedOffers(res.invitedOfferIds);
+        })
+        .catch(err => console.log('Check general invitation error:', err));
     }
-  }, [userRole, profile]);
+  }, [userRole, profile, student.id, student.user_id]);
 
   const handleToggleSpeech = async () => {
     const speaking = await Speech.isSpeakingAsync();
@@ -112,10 +120,10 @@ const StudentDetailScreen = ({ route }) => {
       };
       await applicationsAPI.create(payload);
       Alert.alert(t('success'), t('invitationSent') || 'Invitation envoyée !');
-      setInvited(true);
+      setInvitedOffers(prev => [...prev, offerId]);
     } catch (err) {
       if (err.message?.includes('23505') || err.message?.includes('duplicate')) {
-        Alert.alert('', t('alreadyApplied'));
+        Alert.alert('', t('alreadyInvited'));
       } else {
         Alert.alert(t('error'), err.message);
       }
@@ -354,9 +362,13 @@ const StudentDetailScreen = ({ route }) => {
         {userRole === 'company' && (
           <View style={styles.actionsSection}>
             <AnimatedButton
-              text={invited ? t('applicationSent') : (inviting ? t('loading') : t('inviteStudent'))}
+              text={
+                companyOffers.length === 1 && invitedOffers.includes(companyOffers[0]?.id)
+                  ? (t('invitationSent') || 'Invitation envoyée !')
+                  : (inviting ? t('loading') : t('inviteStudent'))
+              }
               onPress={onInvitePress}
-              disabled={inviting || invited}
+              disabled={inviting || (companyOffers.length === 1 && invitedOffers.includes(companyOffers[0]?.id))}
             />
             <View style={{ height: 12 }} />
             <AnimatedButton
@@ -384,8 +396,13 @@ const StudentDetailScreen = ({ route }) => {
               keyboardShouldPersistTaps="handled"
               renderItem={({ item }) => (
                 <TouchableOpacity
-                  style={[styles.offerItem, { backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(120,120,120,0.05)', borderColor: colors.glassBorder }]}
-                  onPress={() => handleInvite(item.id)}
+                  style={[
+                    styles.offerItem, 
+                    { backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(120,120,120,0.05)', borderColor: colors.glassBorder },
+                    invitedOffers.includes(item.id) && { opacity: 0.6 }
+                  ]}
+                  onPress={() => !invitedOffers.includes(item.id) && handleInvite(item.id)}
+                  disabled={invitedOffers.includes(item.id)}
                   accessibilityRole="button"
                   accessibilityLabel={item.title}
                 >
@@ -394,10 +411,14 @@ const StudentDetailScreen = ({ route }) => {
                       {item.title}
                     </Text>
                     <Text style={[styles.offerItemType, { fontSize: scaledSize(12), color: colors.textSecondary }]}>
-                      {item.type === 'stage' ? t('stage') : t('alternance')}
+                      {invitedOffers.includes(item.id) ? (t('invitationSent') || 'Déjà invité') : (item.type === 'stage' ? t('stage') : t('alternance'))}
                     </Text>
                   </View>
-                  <Feather name="chevron-right" size={18} color={colors.accent} />
+                  {invitedOffers.includes(item.id) ? (
+                    <Feather name="check-circle" size={18} color={COLORS.success} />
+                  ) : (
+                    <Feather name="chevron-right" size={18} color={colors.accent} />
+                  )}
                 </TouchableOpacity>
               )}
               style={{ maxHeight: 300 }}

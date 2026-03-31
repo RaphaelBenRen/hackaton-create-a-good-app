@@ -97,6 +97,11 @@ export const applicationsAPI = {
   }),
   delete: (id) => request(`/applications/${id}`, { method: 'DELETE' }),
   check: (offerId) => request(`/applications/check?offer_id=${offerId}`),
+  checkAsCompany: (studentId, offerId = null) => {
+    let url = `/applications/check-as-company?student_id=${studentId}`;
+    if (offerId) url += `&offer_id=${offerId}`;
+    return request(url);
+  },
 };
 
 // ─── Conversations ───

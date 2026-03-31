@@ -99,6 +99,29 @@ router.get('/check', authenticate, async (req, res) => {
   res.json({ applied: !!data });
 });
 
+// GET /api/applications/check-as-company?student_id=...&offer_id=...
+router.get('/check-as-company', authenticate, async (req, res) => {
+  const { student_id, offer_id } = req.query;
+  const { data: company } = await supabase.from('companies').select('id').eq('user_id', req.user.id).single();
+  if (!company) return res.status(404).json({ error: 'Company not found' });
+
+  const query = supabase
+    .from('applications')
+    .select('offer_id')
+    .eq('company_id', company.id)
+    .eq('student_id', student_id);
+
+  if (offer_id) {
+    query.eq('offer_id', offer_id);
+    const { data } = await query.maybeSingle();
+    return res.json({ invited: !!data });
+  }
+
+  const { data } = await query;
+  const invitedOfferIds = data ? data.map(app => app.offer_id) : [];
+  res.json({ invitedOfferIds });
+});
+
 // PUT /api/applications/:id — update status
 router.put('/:id', authenticate, async (req, res) => {
   const { data, error } = await supabase
