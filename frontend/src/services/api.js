@@ -1,6 +1,6 @@
 import { supabase } from './supabase';
 
-const API_URL = 'http://192.168.1.86:3001/api';
+const API_URL = 'https://hackaton-create-a-good-app.onrender.com/api';
 
 const getToken = async () => {
   const { data: { session } } = await supabase.auth.getSession();
