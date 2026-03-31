@@ -36,7 +36,7 @@ const LoginScreen = ({ navigation }) => {
         style={styles.flex}
       >
         <ScrollView contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
-          <Animated.View style={[{opacity: 1}, styles.header]}>
+          <Animated.View style={[{ opacity: 1 }, styles.header]}>
             <View style={styles.logoContainer}>
               <Feather name="navigation" size={60} color={isDarkMode ? "#fff" : colors.primary} />
             </View>
@@ -48,7 +48,7 @@ const LoginScreen = ({ navigation }) => {
             </Text>
           </Animated.View>
 
-          <Animated.View style={{opacity: 1}}>
+          <Animated.View style={{ opacity: 1 }}>
             <GlassCard intensity={30} style={{ padding: 30 }}>
               <Text style={[styles.label, { fontSize: scaledSize(14), color: colors.text }]}>{t('email')}</Text>
               <TextInput

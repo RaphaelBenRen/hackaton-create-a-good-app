@@ -32,7 +32,7 @@ const HomeScreen = () => {
     try {
       let data = [];
       const activeOffer = companyOffers?.find(o => o.is_active);
-      
+
       if (activeOffer) {
         // Use the new Recommendation Engine against their first active offer
         data = await recommendationsAPI.getForOffer(activeOffer.id);
@@ -40,7 +40,7 @@ const HomeScreen = () => {
         // Fallback to all students if no active offers
         data = await studentsAPI.list();
       }
-      
+
       if (data) setItems(data);
     } catch (err) {
       console.log('Error fetching students:', err);

@@ -15,19 +15,19 @@ import { studentsAPI, storageAPI, referencesAPI } from '../../services/api';
 
 const StudentProfileScreen = ({ route, navigation }) => {
   const { t, scaledSize, loadProfile, logout, profile: appProfile, colors, isDarkMode } = useApp();
-  
+
   // Utiliser le profil passé en paramètre ou le profil global de l'app si disponible
   const existingProfile = route?.params?.profile || appProfile || null;
   const isEditing = !!existingProfile;
-  
+
   // Identité
   const [firstName, setFirstName] = useState(existingProfile?.first_name || '');
   const [lastName, setLastName] = useState(existingProfile?.last_name || '');
   const [phone, setPhone] = useState(existingProfile?.phone || '');
   const [bio, setBio] = useState(existingProfile?.bio || '');
   const [studyField, setStudyField] = useState(existingProfile?.study_field || '');
-  const [targetJob, setTargetJob] = useState(existingProfile?.target_job || ''); 
-  
+  const [targetJob, setTargetJob] = useState(existingProfile?.target_job || '');
+
   // Tableaux dynamiques au lieu de texte simple
   const [skills, setSkills] = useState(existingProfile?.skills || []);
   const [qualities, setQualities] = useState(existingProfile?.qualities || []);
@@ -42,7 +42,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
   const [contractStart, setContractStart] = useState(existingProfile?.contract_start_date ? new Date(existingProfile.contract_start_date) : null);
   const [contractEnd, setContractEnd] = useState(existingProfile?.contract_end_date ? new Date(existingProfile.contract_end_date) : null);
 
-  
+
   // Upload CV
   const [cvFile, setCvFile] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -89,7 +89,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
     setAiAnalyzing(true);
     try {
       const data = await storageAPI.analyzeCV(file.uri, file.name, file.mimeType);
-      
+
       if (data.skills && Array.isArray(data.skills)) setSkills(data.skills);
       if (data.qualities && Array.isArray(data.qualities)) setQualities(data.qualities);
       if (data.experiences && Array.isArray(data.experiences)) setExperiences(data.experiences);
@@ -173,7 +173,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
       } else {
         await studentsAPI.create(payload);
       }
-      
+
       await loadProfile();
     } catch (error) {
       Alert.alert(t('error'), error.message);
@@ -192,7 +192,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
           <Text style={[
             styles.chipText,
             { fontSize: scaledSize(13) },
-            selected === item.key && styles.chipTextActive,
+            selected === item.key ? styles.chipTextActive : { color: colors.textSecondary },
           ]}>{item.label}</Text>
         </TouchableOpacity>
       ))}
@@ -202,7 +202,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
   const SearchableDropdown = ({ label, placeholder, value, onSelect, data, topData }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [search, setSearch] = useState('');
-    
+
     // Filtrer la liste globale ou afficher les principaux
     let displayData = [];
     if (search.trim() === '') {
@@ -218,54 +218,54 @@ const StudentProfileScreen = ({ route, navigation }) => {
     return (
       <View style={{ marginBottom: 15 }}>
         <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 0, color: colors.text }]}>{label}</Text>
-        <TouchableOpacity 
-          style={[styles.input, { justifyContent: 'center' }]} 
+        <TouchableOpacity
+          style={[styles.input, { justifyContent: 'center' }]}
           onPress={() => { setModalVisible(true); setSearch(''); }}
         >
           <Text style={{ color: value ? colors.text : colors.textTertiary, fontSize: scaledSize(16) }}>
             {value || placeholder}
           </Text>
         </TouchableOpacity>
-        
+
         <Modal visible={modalVisible} transparent animationType="slide">
           <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1 }}>
             <View style={styles.dateModalOverlay}>
               <View style={[styles.dateModalContent, { backgroundColor: colors.secondary, height: '85%', padding: 20 }]}>
-                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 15 }}>
-                    <Text style={{ color: colors.text, fontSize: 18, fontWeight: 'bold' }}>Saisissez votre choix</Text>
-                    <TouchableOpacity onPress={() => setModalVisible(false)}><Feather name="x" size={24} color={colors.error} /></TouchableOpacity>
-                 </View>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 15 }}>
+                  <Text style={{ color: colors.text, fontSize: 18, fontWeight: 'bold' }}>Saisissez votre choix</Text>
+                  <TouchableOpacity onPress={() => setModalVisible(false)}><Feather name="x" size={24} color={colors.error} /></TouchableOpacity>
+                </View>
 
-                 <Text style={{ color: colors.textSecondary, fontSize: 13, marginBottom: 10 }}>Sélectionnez dans la liste ou tapez pour ajouter  👇</Text>
-                 
-                 <TextInput 
-                   style={[styles.input, { marginBottom: 15, borderColor: colors.accent, borderWidth: 2, color: colors.text }]} 
-                   placeholder="Rechercher ou écrire un nouveau métier..." 
-                   placeholderTextColor={colors.textTertiary}
-                   value={search}
-                   onChangeText={setSearch}
-                   autoFocus
-                 />
-                 
-                 <FlatList
-                   data={displayData}
-                   keyExtractor={(item, index) => `${item}-${index}`}
-                   keyboardShouldPersistTaps="handled"
-                   renderItem={({ item, index }) => {
-                     const isCustom = index === 0 && search.trim() !== '' && !data.some(d => d.toLowerCase() === search.toLowerCase().trim());
-                     return (
-                       <TouchableOpacity 
-                         style={{ paddingVertical: 15, borderBottomWidth: 1, borderBottomColor: colors.glassBorder, flexDirection: 'row', alignItems: 'center' }}
-                         onPress={() => { onSelect(item); setModalVisible(false); }}
-                       >
-                         {isCustom && <Feather name="plus-circle" size={16} color={colors.success} style={{ marginRight: 10 }} />}
-                         <Text style={{ color: isCustom ? colors.success : colors.text, fontSize: 16, fontWeight: isCustom ? 'bold' : 'normal' }}>
-                           {isCustom ? `Ajouter "${item}"` : item}
-                         </Text>
-                       </TouchableOpacity>
-                     );
-                   }}
-                 />
+                <Text style={{ color: colors.textSecondary, fontSize: 13, marginBottom: 10 }}>Sélectionnez dans la liste ou tapez pour ajouter  👇</Text>
+
+                <TextInput
+                  style={[styles.input, { marginBottom: 15, borderColor: colors.accent, borderWidth: 2, color: colors.text }]}
+                  placeholder="Rechercher ou écrire un nouveau métier..."
+                  placeholderTextColor={colors.textTertiary}
+                  value={search}
+                  onChangeText={setSearch}
+                  autoFocus
+                />
+
+                <FlatList
+                  data={displayData}
+                  keyExtractor={(item, index) => `${item}-${index}`}
+                  keyboardShouldPersistTaps="handled"
+                  renderItem={({ item, index }) => {
+                    const isCustom = index === 0 && search.trim() !== '' && !data.some(d => d.toLowerCase() === search.toLowerCase().trim());
+                    return (
+                      <TouchableOpacity
+                        style={{ paddingVertical: 15, borderBottomWidth: 1, borderBottomColor: colors.glassBorder, flexDirection: 'row', alignItems: 'center' }}
+                        onPress={() => { onSelect(item); setModalVisible(false); }}
+                      >
+                        {isCustom && <Feather name="plus-circle" size={16} color={colors.success} style={{ marginRight: 10 }} />}
+                        <Text style={{ color: isCustom ? colors.success : colors.text, fontSize: 16, fontWeight: isCustom ? 'bold' : 'normal' }}>
+                          {isCustom ? `Ajouter "${item}"` : item}
+                        </Text>
+                      </TouchableOpacity>
+                    );
+                  }}
+                />
               </View>
             </View>
           </KeyboardAvoidingView>
@@ -282,7 +282,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
     <GradientBackground variant="topRight">
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.flex}>
         <ScrollView contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
-          
+
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
             <View>
               <Text style={[styles.title, { fontSize: scaledSize(26), color: colors.text }]}>
@@ -324,7 +324,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
             </Text>
 
             <TouchableOpacity
-              style={[styles.uploadButton, (cvFile || existingProfile?.cv_url) && styles.uploadButtonDone]}
+              style={[styles.uploadButton, { borderColor: colors.glassBorder }, (cvFile || existingProfile?.cv_url) && styles.uploadButtonDone]}
               onPress={handlePickCV}
               disabled={aiAnalyzing}
             >
@@ -337,7 +337,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
                   color={(cvFile || existingProfile?.cv_url) ? colors.success : (isDarkMode ? '#fff' : colors.text)}
                 />
               )}
-              <Text style={[styles.uploadText, { fontSize: scaledSize(15) }]}>
+              <Text style={[styles.uploadText, { fontSize: scaledSize(15), color: colors.text }]}>
                 {aiAnalyzing ? "Analyse en cours..." : (cvFile ? cvFile.name : (existingProfile?.cv_url ? "Remplacer mon CV" : "Sélectionner mon CV"))}
               </Text>
             </TouchableOpacity>
@@ -361,7 +361,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
               <Feather name="award" size={16} color={colors.text} />
               <Text style={[styles.sectionTitle, { fontSize: scaledSize(16), color: colors.text }]}>Compétences & Soft Skills</Text>
             </View>
-            
+
             <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 0, color: colors.text }]}>Vos Compétences Techniques</Text>
             {skills.map((s, index) => (
               <View key={`skill-${index}`} style={[styles.dynamicBox, { padding: 4, paddingLeft: 10, flexDirection: 'row', alignItems: 'center' }]}>
@@ -396,7 +396,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
             {experiences.map((exp, index) => (
               <View key={`exp-${index}`} style={styles.dynamicBox}>
                 <TouchableOpacity onPress={() => { const n = [...experiences]; n.splice(index, 1); setExperiences(n); }} style={styles.removeBtn}>
-                   <Feather name="x" size={18} color={colors.error} />
+                  <Feather name="x" size={18} color={colors.error} />
                 </TouchableOpacity>
                 <TextInput style={[styles.dynamicInput, { color: colors.text }]} placeholder="Poste (ex: Développeur)" placeholderTextColor={colors.textTertiary} value={exp.title} onChangeText={v => { const n = [...experiences]; n[index].title = v; setExperiences(n); }} />
                 <TextInput style={[styles.dynamicInput, { color: colors.text }]} placeholder="Entreprise" placeholderTextColor={colors.textTertiary} value={exp.company} onChangeText={v => { const n = [...experiences]; n[index].company = v; setExperiences(n); }} />
@@ -418,7 +418,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
             {education.map((edu, index) => (
               <View key={`edu-${index}`} style={styles.dynamicBox}>
                 <TouchableOpacity onPress={() => { const n = [...education]; n.splice(index, 1); setEducation(n); }} style={styles.removeBtn}>
-                   <Feather name="x" size={18} color={colors.error} />
+                  <Feather name="x" size={18} color={colors.error} />
                 </TouchableOpacity>
                 <TextInput style={[styles.dynamicInput, { color: colors.text }]} placeholder="Diplôme (ex: Master IT)" placeholderTextColor={colors.textTertiary} value={edu.degree} onChangeText={v => { const n = [...education]; n[index].degree = v; setEducation(n); }} />
                 <TextInput style={[styles.dynamicInput, { color: colors.text }]} placeholder="Établissement" placeholderTextColor={colors.textTertiary} value={edu.institution} onChangeText={v => { const n = [...education]; n[index].institution = v; setEducation(n); }} />
@@ -437,8 +437,8 @@ const StudentProfileScreen = ({ route, navigation }) => {
               <Feather name="target" size={16} color={colors.text} />
               <Text style={[styles.sectionTitle, { fontSize: scaledSize(16), color: colors.text }]}>Métier Recherché</Text>
             </View>
-            
-            <SearchableDropdown 
+
+            <SearchableDropdown
               label="Secteur global (Domaine d'études)"
               placeholder="Sélectionnez un domaine d'études..."
               value={studyField}
@@ -447,7 +447,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
               topData={topSectors}
             />
 
-            <SearchableDropdown 
+            <SearchableDropdown
               label="Poste exact recherché (Stage ou Alternance)"
               placeholder="Ex: Développeur Full-Stack, Chef de projet..."
               value={targetJob}
@@ -472,21 +472,21 @@ const StudentProfileScreen = ({ route, navigation }) => {
 
           {/* 8. Divers */}
           <GlassCard style={styles.card}>
-             <View style={styles.sectionHeader}>
-               <Feather name="map-pin" size={16} color={colors.text} />
-               <Text style={[styles.sectionTitle, { fontSize: scaledSize(16), color: colors.text }]}>Localisation</Text>
-             </View>
-             
-             <SearchableDropdown 
-               label="Ville"
-               placeholder="Ex: Paris, Lyon..."
-               value={city}
-               onSelect={setCity}
-               data={citiesList}
-             />
+            <View style={styles.sectionHeader}>
+              <Feather name="map-pin" size={16} color={colors.text} />
+              <Text style={[styles.sectionTitle, { fontSize: scaledSize(16), color: colors.text }]}>Localisation</Text>
+            </View>
 
-             <Text style={[styles.label, { fontSize: scaledSize(14), color: colors.text }]}>{t('mobilityRadius')} (en km)</Text>
-             <TextInput style={[styles.input, { fontSize: scaledSize(16), width: 120, color: colors.text }]} value={mobilityRadius} onChangeText={setMobilityRadius} keyboardType="numeric" />
+            <SearchableDropdown
+              label="Ville"
+              placeholder="Ex: Paris, Lyon..."
+              value={city}
+              onSelect={setCity}
+              data={citiesList}
+            />
+
+            <Text style={[styles.label, { fontSize: scaledSize(14), color: colors.text }]}>{t('mobilityRadius')} (en km)</Text>
+            <TextInput style={[styles.input, { fontSize: scaledSize(16), width: 120, color: colors.text }]} value={mobilityRadius} onChangeText={setMobilityRadius} keyboardType="numeric" />
           </GlassCard>
 
           <View style={styles.saveContainer}>

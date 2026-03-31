@@ -22,7 +22,7 @@ const CompanyProfileScreen = () => {
   const [contactEmail, setContactEmail] = useState('');
   const [contactPhone, setContactPhone] = useState('');
   const [loading, setLoading] = useState(false);
-  
+
   const [sectorsList, setSectorsList] = useState([]);
   const [topSectors, setTopSectors] = useState([]);
   const [citiesList, setCitiesList] = useState([]);
@@ -87,7 +87,7 @@ const CompanyProfileScreen = () => {
           <Text style={[
             styles.chipText,
             { fontSize: scaledSize(13) },
-            selected === item.key && styles.chipTextActive,
+            selected === item.key ? styles.chipTextActive : { color: colors.textSecondary },
           ]}>{item.label}</Text>
         </TouchableOpacity>
       ))}
@@ -97,7 +97,7 @@ const CompanyProfileScreen = () => {
   const SearchableDropdown = ({ label, placeholder, value, onSelect, data, topData }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [search, setSearch] = useState('');
-    
+
     let displayData = [];
     if (search.trim() === '') {
       displayData = topData || data.slice(0, 15);
@@ -111,56 +111,56 @@ const CompanyProfileScreen = () => {
     return (
       <View style={{ marginBottom: 15 }}>
         <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 0, color: colors.text }]}>{label}</Text>
-        <TouchableOpacity 
-          style={[styles.input, { justifyContent: 'center' }]} 
+        <TouchableOpacity
+          style={[styles.input, { justifyContent: 'center' }]}
           onPress={() => { setModalVisible(true); setSearch(''); }}
         >
           <Text style={{ color: value ? colors.text : colors.textTertiary, fontSize: scaledSize(16) }}>
             {value || placeholder}
           </Text>
         </TouchableOpacity>
-        
+
         <Modal visible={modalVisible} transparent animationType="slide">
           <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1 }}>
-             <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.8)', justifyContent: 'flex-end' }}>
-               <View style={{ backgroundColor: colors.secondary, borderTopLeftRadius: 20, borderTopRightRadius: 20, paddingBottom: 30, height: '85%', padding: 20 }}>
-                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 15 }}>
-                    <Text style={{ color: colors.text, fontSize: 18, fontWeight: 'bold' }}>Saisissez votre choix</Text>
-                    <TouchableOpacity onPress={() => setModalVisible(false)}><Feather name="x" size={24} color={colors.error} /></TouchableOpacity>
-                 </View>
+            <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.8)', justifyContent: 'flex-end' }}>
+              <View style={{ backgroundColor: colors.secondary, borderTopLeftRadius: 20, borderTopRightRadius: 20, paddingBottom: 30, height: '85%', padding: 20 }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 15 }}>
+                  <Text style={{ color: colors.text, fontSize: 18, fontWeight: 'bold' }}>Saisissez votre choix</Text>
+                  <TouchableOpacity onPress={() => setModalVisible(false)}><Feather name="x" size={24} color={colors.error} /></TouchableOpacity>
+                </View>
 
-                 <Text style={{ color: colors.textSecondary, fontSize: 13, marginBottom: 10 }}>Sélectionnez dans la liste ou tapez pour ajouter  👇</Text>
-                 
-                 <TextInput 
-                   style={[styles.input, { marginBottom: 15, borderColor: colors.accent, borderWidth: 2, color: colors.text }]} 
-                   placeholder="Rechercher..." 
-                   placeholderTextColor={colors.textTertiary}
-                   value={search}
-                   onChangeText={setSearch}
-                   autoFocus
-                 />
-                 
-                 <FlatList
-                   data={displayData}
-                   keyExtractor={(item, index) => `${item}-${index}`}
-                   keyboardShouldPersistTaps="handled"
-                   renderItem={({ item, index }) => {
-                     const isCustom = index === 0 && search.trim() !== '' && !data.some(d => d.toLowerCase() === search.toLowerCase().trim());
-                     return (
-                       <TouchableOpacity 
-                         style={{ paddingVertical: 15, borderBottomWidth: 1, borderBottomColor: colors.glassBorder, flexDirection: 'row', alignItems: 'center' }}
-                         onPress={() => { onSelect(item); setModalVisible(false); }}
-                       >
-                         {isCustom && <Feather name="plus-circle" size={16} color={colors.success} style={{ marginRight: 10 }} />}
-                         <Text style={{ color: isCustom ? colors.success : colors.text, fontSize: 16, fontWeight: isCustom ? 'bold' : 'normal' }}>
-                           {isCustom ? `Ajouter "${item}"` : item}
-                         </Text>
-                       </TouchableOpacity>
-                     );
-                   }}
-                 />
-               </View>
-             </View>
+                <Text style={{ color: colors.textSecondary, fontSize: 13, marginBottom: 10 }}>Sélectionnez dans la liste ou tapez pour ajouter  👇</Text>
+
+                <TextInput
+                  style={[styles.input, { marginBottom: 15, borderColor: colors.accent, borderWidth: 2, color: colors.text }]}
+                  placeholder="Rechercher..."
+                  placeholderTextColor={colors.textTertiary}
+                  value={search}
+                  onChangeText={setSearch}
+                  autoFocus
+                />
+
+                <FlatList
+                  data={displayData}
+                  keyExtractor={(item, index) => `${item}-${index}`}
+                  keyboardShouldPersistTaps="handled"
+                  renderItem={({ item, index }) => {
+                    const isCustom = index === 0 && search.trim() !== '' && !data.some(d => d.toLowerCase() === search.toLowerCase().trim());
+                    return (
+                      <TouchableOpacity
+                        style={{ paddingVertical: 15, borderBottomWidth: 1, borderBottomColor: colors.glassBorder, flexDirection: 'row', alignItems: 'center' }}
+                        onPress={() => { onSelect(item); setModalVisible(false); }}
+                      >
+                        {isCustom && <Feather name="plus-circle" size={16} color={colors.success} style={{ marginRight: 10 }} />}
+                        <Text style={{ color: isCustom ? colors.success : colors.text, fontSize: 16, fontWeight: isCustom ? 'bold' : 'normal' }}>
+                          {isCustom ? `Ajouter "${item}"` : item}
+                        </Text>
+                      </TouchableOpacity>
+                    );
+                  }}
+                />
+              </View>
+            </View>
           </KeyboardAvoidingView>
         </Modal>
       </View>
@@ -203,7 +203,7 @@ const CompanyProfileScreen = () => {
               accessibilityLabel={t('companyName')}
             />
 
-            <SearchableDropdown 
+            <SearchableDropdown
               label="Secteur d'activité"
               placeholder="Sélectionnez un secteur d'activité..."
               value={sector}
@@ -238,7 +238,7 @@ const CompanyProfileScreen = () => {
               accessibilityLabel={t('description')}
             />
 
-            <SearchableDropdown 
+            <SearchableDropdown
               label="Localisation (Ville)"
               placeholder="Ex: Paris, Lyon..."
               value={location}

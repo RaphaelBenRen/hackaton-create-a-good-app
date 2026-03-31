@@ -311,7 +311,7 @@ const SettingsScreen = () => {
         <Text style={[styles.sectionTitle, { fontSize: scaledSize(12), color: colors.textSecondary }]}>♿ Application Inclusive</Text>
         <View style={[styles.group, { backgroundColor: colors.glassBackground, borderColor: colors.glassBorder }]}>
           <TouchableOpacity
-            style={[styles.item, styles.itemBorder]}
+            style={[styles.item, styles.itemBorder, { borderBottomColor: colors.glassBorder }]}
             onPress={() => setInclusiveModalVisible(true)}
             accessibilityRole="button"
             accessibilityLabel="En savoir plus sur notre démarche inclusive"

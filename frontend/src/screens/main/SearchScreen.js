@@ -40,11 +40,11 @@ const SearchScreen = () => {
 
   useEffect(() => {
     Animated.timing(fadeAnim, { toValue: 1, duration: 400, useNativeDriver: true }).start();
-    
+
     // Fetch sectors for filter
     referencesAPI.list().then(data => {
       if (data && data.sectors) setDynamicSectors(data.sectors.map(s => s.name));
-    }).catch(() => {});
+    }).catch(() => { });
   }, [fadeAnim]);
 
   /* ── types ── */

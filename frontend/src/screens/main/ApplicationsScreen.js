@@ -15,9 +15,9 @@ import { applicationsAPI } from '../../services/api';
 /* ──────────────────── status config ──────────────────── */
 
 const statusConfig = {
-  pending:  { color: COLORS.warning, icon: 'clock' },
+  pending: { color: COLORS.warning, icon: 'clock' },
   accepted: { color: COLORS.success, icon: 'check-circle' },
-  rejected: { color: COLORS.error,   icon: 'x-circle' },
+  rejected: { color: COLORS.error, icon: 'x-circle' },
 };
 
 /* ──────────────────── component ──────────────────── */
@@ -130,7 +130,7 @@ const ApplicationsScreen = () => {
 
     return (
       <GlassCard style={styles.card} noPadding>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.cardBody}
           onPress={() => {
             if (userRole === 'student' && item.offers) {
@@ -188,7 +188,7 @@ const ApplicationsScreen = () => {
               </View>
             ) : null}
             {item.cv_url && (
-              <TouchableOpacity 
+              <TouchableOpacity
                 style={styles.viewCvBtn}
                 onPress={() => Linking.openURL(item.cv_url)}
               >
@@ -197,7 +197,7 @@ const ApplicationsScreen = () => {
               </TouchableOpacity>
             )}
             {item.cover_letter_url && (
-              <TouchableOpacity 
+              <TouchableOpacity
                 style={[styles.viewCvBtn, { marginTop: 8 }]}
                 onPress={() => Linking.openURL(item.cover_letter_url)}
               >
@@ -300,16 +300,16 @@ const ApplicationsScreen = () => {
             style={[styles.actionBtn, styles.chatBtn, { minHeight: 44 }]}
             onPress={() => {
               if (userRole === 'company') {
-                navigation.navigate('Chat', { 
-                  otherUserId: item.student_id, 
+                navigation.navigate('Chat', {
+                  otherUserId: item.student_id,
                   otherName: `${item.students?.first_name || ''} ${item.students?.last_name || ''}`,
-                  offerId: item.offer_id 
+                  offerId: item.offer_id
                 });
               } else {
-                navigation.navigate('Chat', { 
-                  otherUserId: item.company_id, 
+                navigation.navigate('Chat', {
+                  otherUserId: item.company_id,
                   otherName: item.offers?.companies?.company_name || '',
-                  offerId: item.offer_id 
+                  offerId: item.offer_id
                 });
               }
             }}
@@ -350,8 +350,8 @@ const ApplicationsScreen = () => {
 
         {/* filter tabs */}
         <View style={{ marginBottom: 14 }}>
-          <ScrollView 
-            horizontal 
+          <ScrollView
+            horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.tabsContainer}
           >
