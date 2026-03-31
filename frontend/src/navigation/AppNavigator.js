@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator, View, StyleSheet, Platform, Modal } from 'react-native';
+import { ActivityIndicator, View, StyleSheet, Platform, Modal, TouchableOpacity, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -122,8 +122,9 @@ const AppNavigator = () => {
   useEffect(() => {
     const checkOnboarding = async () => {
       try {
-        const val = await AsyncStorage.getItem('onboardingSeen');
-        console.log('[AppNavigator] onboardingSeen value:', val);
+        const storageKey = `onboardingSeen_${profile?.id || 'guest'}`;
+        const val = await AsyncStorage.getItem(storageKey);
+        console.log(`[AppNavigator] ${storageKey} value:`, val);
         setOnboardingDone(val === 'true');
       } catch (e) {
         console.log('[AppNavigator] Error reading storage:', e);
@@ -177,6 +178,20 @@ const AppNavigator = () => {
           setOnboardingDone(true);
         }} />
       </Modal>
+
+      {/* Bouton de debug temporaire pour forcer l'onboarding ( visible uniquement en dev ) */}
+      {session && profile && onboardingDone === true && (
+        <TouchableOpacity 
+          style={{ position: 'absolute', top: 50, right: 20, padding: 5, backgroundColor: 'rgba(255,0,0,0.3)', borderRadius: 10 }}
+          onPress={async () => {
+          const storageKey = `onboardingSeen_${profile?.id || 'guest'}`;
+          await AsyncStorage.removeItem(storageKey);
+            setOnboardingDone(false);
+          }}
+        >
+          <Text style={{ color: '#fff', fontSize: 10 }}>Reset Onboarding</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };

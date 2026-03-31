@@ -329,7 +329,8 @@ const SettingsScreen = () => {
             style={styles.item}
             onPress={async () => {
               const AsyncStorage = require('@react-native-async-storage/async-storage').default;
-              await AsyncStorage.removeItem('onboardingSeen');
+              const storageKey = `onboardingSeen_${profile?.id || 'guest'}`;
+              await AsyncStorage.removeItem(storageKey);
               Alert.alert('✅', language === 'en' ? 'Onboarding reset. Restart the app to see it again.' : "L'onboarding a été réinitialisé. Relancez l'app pour le revoir.");
             }}
             accessibilityRole="button"

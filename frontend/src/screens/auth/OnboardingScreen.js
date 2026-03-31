@@ -70,7 +70,7 @@ const SLIDES = [
 ];
 
 const OnboardingScreen = ({ onDone }) => {
-  const { language, t, scaledSize, colors, isDarkMode } = useApp();
+  const { language, t, scaledSize, colors, isDarkMode, profile } = useApp();
   const insets = useSafeAreaInsets();
   const flatListRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -79,7 +79,8 @@ const OnboardingScreen = ({ onDone }) => {
   const isEn = language === 'en';
 
   const handleDone = async () => {
-    await AsyncStorage.setItem('onboardingSeen', 'true');
+    const storageKey = `onboardingSeen_${profile?.id || 'guest'}`;
+    await AsyncStorage.setItem(storageKey, 'true');
     if (onDone) onDone();
   };
 

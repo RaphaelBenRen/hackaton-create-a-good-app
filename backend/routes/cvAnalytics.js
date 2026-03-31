@@ -12,7 +12,8 @@ router.post("/analyze", upload.single("cv"), async (req, res) => {
       return res.status(400).json({ error: "Aucun fichier CV fourni" });
     }
 
-    const apiKey = (process.env.OPENAI_API_KEY || "").trim();
+    // Suppression de tout caractère invisible, espace, ou guillemet potentiel
+    const apiKey = (process.env.OPENAI_API_KEY || "").replace(/[^a-zA-Z0-9_-]/g, "");
     if (!apiKey) {
       return res.status(500).json({ error: "La clé API OPENAI_API_KEY n'est pas configurée dans le backend" });
     }
@@ -46,7 +47,7 @@ Texte du CV :
 ${cvText}`;
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: "gpt-3.5-turbo",
       messages: [
         { role: "system", content: "Tu es un extracteur de données JSON. Réponds uniquement avec le JSON valide, sans formattage Markdown." },
         { role: "user", content: prompt }
@@ -71,7 +72,8 @@ router.post("/analyzeOffer", upload.single("pdf"), async (req, res) => {
       return res.status(400).json({ error: "Aucun fichier PDF fourni" });
     }
 
-    const apiKey = (process.env.OPENAI_API_KEY || "").trim();
+    // Suppression de tout caractère invisible, espace, ou guillemet potentiel
+    const apiKey = (process.env.OPENAI_API_KEY || "").replace(/[^a-zA-Z0-9_-]/g, "");
     if (!apiKey) {
       return res.status(500).json({ error: "La clé API OPENAI_API_KEY n'est pas configurée dans le backend" });
     }
@@ -103,7 +105,7 @@ Texte de l'offre :
 ${pdfText}`;
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: "gpt-3.5-turbo",
       messages: [
         { role: "system", content: "Tu es un extracteur de données JSON. Réponds uniquement avec un JSON valide, sans formatage Markdown." },
         { role: "user", content: prompt }
