@@ -12,11 +12,15 @@ router.post("/analyze", upload.single("cv"), async (req, res) => {
       return res.status(400).json({ error: "Aucun fichier CV fourni" });
     }
 
-    if (!process.env.OPENAI_API_KEY) {
+    const apiKey = (process.env.OPENAI_API_KEY || "").trim();
+    if (!apiKey) {
       return res.status(500).json({ error: "La clé API OPENAI_API_KEY n'est pas configurée dans le backend" });
     }
 
-    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+    // Debugging safely
+    console.log(`[CV Analytics] Attempting analysis with key (length: ${apiKey.length}, starts with: ${apiKey.substring(0, 7)}...)`);
+    
+    const openai = new OpenAI({ apiKey });
     const pdfData = await pdfParse(req.file.buffer);
     const cvText = pdfData.text;
 
@@ -67,11 +71,12 @@ router.post("/analyzeOffer", upload.single("pdf"), async (req, res) => {
       return res.status(400).json({ error: "Aucun fichier PDF fourni" });
     }
 
-    if (!process.env.OPENAI_API_KEY) {
+    const apiKey = (process.env.OPENAI_API_KEY || "").trim();
+    if (!apiKey) {
       return res.status(500).json({ error: "La clé API OPENAI_API_KEY n'est pas configurée dans le backend" });
     }
 
-    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+    const openai = new OpenAI({ apiKey });
     const pdfData = await pdfParse(req.file.buffer);
     const pdfText = pdfData.text;
 
