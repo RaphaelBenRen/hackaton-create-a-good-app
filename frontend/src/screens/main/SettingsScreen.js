@@ -118,7 +118,7 @@ const SettingsScreen = () => {
         {/* CV Section — students only */}
         {userRole === 'student' && (
           <>
-            <Text style={[styles.sectionTitle, { fontSize: scaledSize(12) }]}>CV</Text>
+            <Text style={[styles.sectionTitle, { fontSize: scaledSize(12), color: colors.textSecondary }]}>CV</Text>
             <View style={styles.group}>
               {profile?.cv_url ? (
                 <>
@@ -128,10 +128,10 @@ const SettingsScreen = () => {
                       <Feather name="check-circle" size={18} color={colors.success} />
                     </View>
                     <View style={{ flex: 1 }}>
-                      <Text style={[styles.itemTitle, { fontSize: scaledSize(15) }]}>
+                      <Text style={[styles.itemTitle, { fontSize: scaledSize(15), color: colors.text }]}>
                         {getCVName(profile.cv_url)}
                       </Text>
-                      <Text style={[styles.itemSub, { fontSize: scaledSize(12) }]}>
+                      <Text style={[styles.itemSub, { fontSize: scaledSize(12), color: colors.textSecondary }]}>
                         {t('cvUploaded')}
                       </Text>
                     </View>
@@ -196,10 +196,10 @@ const SettingsScreen = () => {
                     <Feather name="upload-cloud" size={18} color={colors.text} />
                   </View>
                   <View style={{ flex: 1 }}>
-                    <Text style={[styles.itemTitle, { fontSize: scaledSize(15) }]}>
+                    <Text style={[styles.itemTitle, { fontSize: scaledSize(15), color: colors.text }]}>
                       {uploading ? t('loading') : t('uploadCV')}
                     </Text>
-                    <Text style={[styles.itemSub, { fontSize: scaledSize(12) }]}>
+                    <Text style={[styles.itemSub, { fontSize: scaledSize(12), color: colors.textSecondary }]}>
                       {t('uploadCVHint')}
                     </Text>
                   </View>

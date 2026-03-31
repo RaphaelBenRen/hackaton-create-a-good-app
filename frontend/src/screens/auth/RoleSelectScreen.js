@@ -68,7 +68,7 @@ const RoleSelectScreen = ({ navigation }) => {
                     {t('studentDesc')}
                   </Text>
                 </View>
-                <View style={[styles.radio, selected === 'student' && { borderColor: colors.accent }]}>
+                <View style={[styles.radio, { borderColor: colors.glassBorder }, selected === 'student' && { borderColor: colors.accent }]}>
                   {selected === 'student' && <View style={[styles.radioInner, { backgroundColor: colors.accent }]} />}
                 </View>
               </View>
@@ -100,7 +100,7 @@ const RoleSelectScreen = ({ navigation }) => {
                     {t('companyDesc')}
                   </Text>
                 </View>
-                <View style={[styles.radio, selected === 'company' && { borderColor: colors.accent }]}>
+                <View style={[styles.radio, { borderColor: colors.glassBorder }, selected === 'company' && { borderColor: colors.accent }]}>
                   {selected === 'company' && <View style={[styles.radioInner, { backgroundColor: colors.accent }]} />}
                 </View>
               </View>

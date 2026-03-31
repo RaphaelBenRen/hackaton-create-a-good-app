@@ -299,7 +299,19 @@ const ApplicationsScreen = () => {
           <TouchableOpacity
             style={[styles.actionBtn, styles.chatBtn, { minHeight: 44 }]}
             onPress={() => {
-              navigation.navigate('Conversations');
+              if (userRole === 'company') {
+                navigation.navigate('Chat', { 
+                  otherUserId: item.student_id, 
+                  otherName: `${item.students?.first_name || ''} ${item.students?.last_name || ''}`,
+                  offerId: item.offer_id 
+                });
+              } else {
+                navigation.navigate('Chat', { 
+                  otherUserId: item.company_id, 
+                  otherName: item.offers?.companies?.company_name || '',
+                  offerId: item.offer_id 
+                });
+              }
             }}
             accessibilityRole="button"
             accessibilityLabel={t('openChat') || 'Ouvrir le chat'}

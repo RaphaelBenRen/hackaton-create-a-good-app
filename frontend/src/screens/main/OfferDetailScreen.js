@@ -159,7 +159,7 @@ const OfferDetailScreen = ({ route }) => {
         >
           <Feather name="chevron-left" size={24} color={colors.text} />
         </TouchableOpacity>
-        <Text style={[styles.headerTitle, { fontSize: scaledSize(22) }]} accessibilityRole="header">
+        <Text style={[styles.headerTitle, { fontSize: scaledSize(22), color: colors.text }]} accessibilityRole="header">
           {t('offerDetails')}
         </Text>
         {/* Audio TTS button */}
@@ -259,8 +259,8 @@ const OfferDetailScreen = ({ route }) => {
         {/* About company */}
         {company.company_name ? (
           <GlassCard style={styles.section}>
-            <Text style={[styles.sectionTitle, { fontSize: scaledSize(18) }]}>{t('aboutCompany')}</Text>
-            <Text style={[styles.companyName, { fontSize: scaledSize(16) }]}>{company.company_name}</Text>
+            <Text style={[styles.sectionTitle, { fontSize: scaledSize(18), color: colors.text }]}>{t('aboutCompany')}</Text>
+            <Text style={[styles.companyName, { fontSize: scaledSize(16), color: colors.text }]}>{company.company_name}</Text>
             {company.sector ? (
               <View style={styles.metaRow}>
                 <Feather name="grid" size={14} color={colors.textSecondary} />

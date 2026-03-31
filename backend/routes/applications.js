@@ -49,6 +49,11 @@ router.post('/', authenticate, async (req, res) => {
           conversation_id: conv.id,
           application_id: data.id,
           content: "Bonjour ! Nous avons consulté votre profil et nous aimerions vous inviter à postuler pour notre offre.",
+          metadata: {
+            type: 'invitation',
+            offer_id: req.body.offer_id,
+            company_id: req.user.id
+          }
         });
       }
     } catch (msgErr) {

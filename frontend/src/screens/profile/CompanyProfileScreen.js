@@ -178,16 +178,16 @@ const CompanyProfileScreen = () => {
           keyboardShouldPersistTaps="handled"
           keyboardDismissMode="none"
         >
-          <Text style={[styles.title, { fontSize: scaledSize(26) }]} accessibilityRole="header">
+          <Text style={[styles.title, { fontSize: scaledSize(26), color: colors.text }]} accessibilityRole="header">
             {t('createProfile')}
           </Text>
-          <Text style={[styles.subtitle, { fontSize: scaledSize(14) }]}>{t('company')}</Text>
+          <Text style={[styles.subtitle, { fontSize: scaledSize(14), color: colors.textSecondary }]}>{t('company')}</Text>
 
           {/* Identité */}
           <GlassCard style={styles.card}>
             <View style={styles.sectionHeader}>
               <Feather name="briefcase" size={16} color={colors.text} />
-              <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>
+              <Text style={[styles.sectionTitle, { fontSize: scaledSize(16), color: colors.text }]}>
                 Identité de l'entreprise
               </Text>
             </View>
@@ -220,7 +220,7 @@ const CompanyProfileScreen = () => {
           <GlassCard style={styles.card}>
             <View style={styles.sectionHeader}>
               <Feather name="info" size={16} color={colors.text} />
-              <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>
+              <Text style={[styles.sectionTitle, { fontSize: scaledSize(16), color: colors.text }]}>
                 À propos
               </Text>
             </View>
@@ -264,7 +264,7 @@ const CompanyProfileScreen = () => {
           <GlassCard style={styles.card}>
             <View style={styles.sectionHeader}>
               <Feather name="mail" size={16} color={colors.text} />
-              <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>
+              <Text style={[styles.sectionTitle, { fontSize: scaledSize(16), color: colors.text }]}>
                 Contact
               </Text>
             </View>

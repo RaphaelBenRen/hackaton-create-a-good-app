@@ -8,7 +8,7 @@ import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { COLORS, SIZES } from '../../constants/theme';
 import { useApp } from '../../services/AppContext';
-import { messagesAPI, conversationsAPI } from '../../services/api';
+import { messagesAPI, conversationsAPI, offersAPI, companiesAPI } from '../../services/api';
 import GradientBackground from '../../components/GradientBackground';
 
 const ChatScreen = ({ route }) => {
@@ -127,6 +127,47 @@ const ChatScreen = ({ route }) => {
           <Text style={[styles.msgText, { fontSize: scaledSize(15), color: own ? '#fff' : colors.text }]}>
             {item.content}
           </Text>
+          
+          {item.metadata?.type === 'invitation' && (
+            <View style={styles.invitationCard}>
+              <View style={[styles.cardDivider, { backgroundColor: colors.glassBorder }]} />
+              <View style={styles.cardActions}>
+                <TouchableOpacity 
+                  style={[styles.cardBtn, { backgroundColor: 'rgba(59,130,246,0.1)' }]}
+                  onPress={async () => {
+                    try {
+                      const offer = await offersAPI.get(item.metadata.offer_id);
+                      navigation.navigate('OfferDetail', { offer });
+                    } catch (err) {
+                      console.error('Navigate to offer error:', err);
+                    }
+                  }}
+                >
+                  <Feather name="briefcase" size={14} color={COLORS.accent} />
+                  <Text style={[styles.cardBtnText, { color: COLORS.accent }]}>Voir l'offre</Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                  style={[styles.cardBtn, { backgroundColor: 'rgba(16,185,129,0.1)' }]}
+                  onPress={async () => {
+                    try {
+                      const company = await companiesAPI.get(item.metadata.company_id);
+                      // Since we don't have a CompanyDetailScreen, fallback to OfferDetail or similar if needed.
+                      // But the user requested a specific link to company info.
+                      // For now, let's navigate to the offer which has company info, or if we have a CompanyDetail we use it.
+                      // Let's assume we might need to add it later or navigation works by ID.
+                      navigation.navigate('OfferDetail', { offer: { id: item.metadata.offer_id, company_id: item.metadata.company_id, ...company } });
+                    } catch (err) {
+                      console.error('Navigate to company error:', err);
+                    }
+                  }}
+                >
+                  <Feather name="home" size={14} color={COLORS.success} />
+                  <Text style={[styles.cardBtnText, { color: COLORS.success }]}>L'entreprise</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          )}
+
           <Text style={[styles.msgTime, { fontSize: scaledSize(11) }]}>
             {formatTime(item.created_at)}
           </Text>
@@ -302,6 +343,32 @@ const styles = StyleSheet.create({
     color: 'rgba(150,150,150,0.6)',
     marginTop: 4,
     alignSelf: 'flex-end',
+  },
+  invitationCard: {
+    marginTop: 10,
+    width: '100%',
+  },
+  cardDivider: {
+    height: 1,
+    width: '100%',
+    marginBottom: 10,
+  },
+  cardActions: {
+    flexDirection: 'row',
+    gap: 8,
+    flexWrap: 'wrap',
+  },
+  cardBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 8,
+    gap: 6,
+  },
+  cardBtnText: {
+    fontSize: 12,
+    fontWeight: '600',
   },
   dateSeparator: {
     alignItems: 'center',

@@ -285,10 +285,10 @@ const StudentProfileScreen = ({ route, navigation }) => {
           
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
             <View>
-              <Text style={[styles.title, { fontSize: scaledSize(26) }]}>
+              <Text style={[styles.title, { fontSize: scaledSize(26), color: colors.text }]}>
                 {isEditing ? 'Modifier mon profil' : t('createProfile')}
               </Text>
-              <Text style={[styles.subtitle, { fontSize: scaledSize(14) }]}>{t('student')}</Text>
+              <Text style={[styles.subtitle, { fontSize: scaledSize(14), color: colors.textSecondary }]}>{t('student')}</Text>
             </View>
             {isEditing && (
               <TouchableOpacity onPress={() => navigation.goBack()} style={{ padding: 10 }}>
@@ -301,7 +301,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
           <GlassCard style={styles.card}>
             <View style={styles.sectionHeader}>
               <Feather name="user" size={16} color={colors.text} />
-              <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>Identité</Text>
+              <Text style={[styles.sectionTitle, { fontSize: scaledSize(16), color: colors.text }]}>Identité</Text>
             </View>
             <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 0, color: colors.text }]}>{t('firstName')} *</Text>
             <TextInput style={[styles.input, { fontSize: scaledSize(16), color: colors.text }]} value={firstName} onChangeText={setFirstName} />
@@ -359,7 +359,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
           <GlassCard style={styles.card}>
             <View style={styles.sectionHeader}>
               <Feather name="award" size={16} color={colors.text} />
-              <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>Compétences & Soft Skills</Text>
+              <Text style={[styles.sectionTitle, { fontSize: scaledSize(16), color: colors.text }]}>Compétences & Soft Skills</Text>
             </View>
             
             <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 0, color: colors.text }]}>Vos Compétences Techniques</Text>
@@ -391,7 +391,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
           <GlassCard style={styles.card}>
             <View style={styles.sectionHeader}>
               <Feather name="briefcase" size={16} color={colors.text} />
-              <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>Expériences pro</Text>
+              <Text style={[styles.sectionTitle, { fontSize: scaledSize(16), color: colors.text }]}>Expériences pro</Text>
             </View>
             {experiences.map((exp, index) => (
               <View key={`exp-${index}`} style={styles.dynamicBox}>
@@ -413,7 +413,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
           <GlassCard style={styles.card}>
             <View style={styles.sectionHeader}>
               <Feather name="book-open" size={16} color={colors.text} />
-              <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>Formations</Text>
+              <Text style={[styles.sectionTitle, { fontSize: scaledSize(16), color: colors.text }]}>Formations</Text>
             </View>
             {education.map((edu, index) => (
               <View key={`edu-${index}`} style={styles.dynamicBox}>
@@ -435,7 +435,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
           <GlassCard style={styles.card}>
             <View style={styles.sectionHeader}>
               <Feather name="target" size={16} color={colors.text} />
-              <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>Métier Recherché</Text>
+              <Text style={[styles.sectionTitle, { fontSize: scaledSize(16), color: colors.text }]}>Métier Recherché</Text>
             </View>
             
             <SearchableDropdown 
@@ -462,7 +462,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
           <GlassCard style={styles.card}>
             <View style={styles.sectionHeader}>
               <Feather name="search" size={16} color={colors.text} />
-              <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>Préférences de recherche</Text>
+              <Text style={[styles.sectionTitle, { fontSize: scaledSize(16), color: colors.text }]}>Préférences de recherche</Text>
             </View>
             <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 0, color: colors.text }]}>{t('searchStatus')}</Text>
             {renderChips(searchStatuses, searchStatus, setSearchStatus)}
@@ -474,7 +474,7 @@ const StudentProfileScreen = ({ route, navigation }) => {
           <GlassCard style={styles.card}>
              <View style={styles.sectionHeader}>
                <Feather name="map-pin" size={16} color={colors.text} />
-               <Text style={[styles.sectionTitle, { fontSize: scaledSize(16) }]}>Localisation</Text>
+               <Text style={[styles.sectionTitle, { fontSize: scaledSize(16), color: colors.text }]}>Localisation</Text>
              </View>
              
              <SearchableDropdown 

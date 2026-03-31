@@ -119,7 +119,7 @@ const SearchScreen = () => {
           <Feather name="briefcase" size={22} color={colors.text} />
         </View>
         <View style={styles.cardInfo}>
-          <Text style={[styles.cardTitle, { fontSize: scaledSize(16) }]} numberOfLines={1}>
+          <Text style={[styles.cardTitle, { fontSize: scaledSize(16), color: colors.text }]} numberOfLines={1}>
             {item.title}
           </Text>
           <Text style={[styles.cardSecondary, { fontSize: scaledSize(13) }]} numberOfLines={1}>
@@ -140,7 +140,7 @@ const SearchScreen = () => {
             <View style={styles.skillsRow}>
               {item.skills_required.slice(0, 3).map((skill, i) => (
                 <View key={i} style={styles.skillChip}>
-                  <Text style={[styles.skillChipText, { fontSize: scaledSize(13) }]}>{skill}</Text>
+                  <Text style={[styles.skillChipText, { fontSize: scaledSize(13), color: colors.text }]}>{skill}</Text>
                 </View>
               ))}
             </View>

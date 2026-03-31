@@ -44,7 +44,7 @@ const RegisterScreen = ({ navigation }) => {
             <View style={styles.logoContainer}>
               <Feather name="navigation" size={60} color={isDarkMode ? "#fff" : colors.primary} />
             </View>
-            <Text style={[styles.title, { fontSize: scaledSize(30) }]} accessibilityRole="header">
+            <Text style={[styles.title, { fontSize: scaledSize(30), color: colors.text }]} accessibilityRole="header">
               {t('register')}
             </Text>
           </Animated.View>
@@ -53,7 +53,7 @@ const RegisterScreen = ({ navigation }) => {
             <GlassCard intensity={30} style={{ padding: 30 }}>
               <Text style={[styles.label, { fontSize: scaledSize(14), color: colors.text }]}>{t('email')}</Text>
               <TextInput
-                style={[styles.input, { fontSize: scaledSize(16) }]}
+                style={[styles.input, { fontSize: scaledSize(16), color: colors.text }]}
                 placeholder={t('email')}
                 placeholderTextColor={colors.textTertiary}
                 value={email}
@@ -67,7 +67,7 @@ const RegisterScreen = ({ navigation }) => {
               <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 16, color: colors.text }]}>{t('password')}</Text>
               <View style={styles.passwordContainer}>
                 <TextInput
-                  style={[styles.input, styles.passwordInput, { fontSize: scaledSize(16) }]}
+                  style={[styles.input, styles.passwordInput, { fontSize: scaledSize(16), color: colors.text }]}
                   placeholder={t('password')}
                   placeholderTextColor={colors.textTertiary}
                   value={password}
@@ -89,7 +89,7 @@ const RegisterScreen = ({ navigation }) => {
               <Text style={[styles.label, { fontSize: scaledSize(14), marginTop: 16, color: colors.text }]}>{t('confirmPassword')}</Text>
               <View style={styles.passwordContainer}>
                 <TextInput
-                  style={[styles.input, styles.passwordInput, { fontSize: scaledSize(16) }]}
+                  style={[styles.input, styles.passwordInput, { fontSize: scaledSize(16), color: colors.text }]}
                   placeholder={t('confirmPassword')}
                   placeholderTextColor={colors.textTertiary}
                   value={confirmPassword}
@@ -115,7 +115,7 @@ const RegisterScreen = ({ navigation }) => {
               />
 
               <View style={styles.footer}>
-                <Text style={[styles.footerText, { fontSize: scaledSize(14) }]}>{t('hasAccount')}</Text>
+                <Text style={[styles.footerText, { fontSize: scaledSize(14), color: colors.textSecondary }]}>{t('hasAccount')}</Text>
                 <TouchableOpacity onPress={() => navigation.navigate('Login')} accessibilityRole="link">
                   <Text style={[styles.footerLink, { fontSize: scaledSize(14), color: colors.accent }]}>{t('login')}</Text>
                 </TouchableOpacity>

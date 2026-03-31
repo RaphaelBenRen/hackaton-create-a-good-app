@@ -65,3 +65,8 @@ ON CONFLICT (name) DO NOTHING;
 ALTER TABLE public.applications 
 ADD COLUMN IF NOT EXISTS type TEXT CHECK (type IN ('apply', 'invite')) DEFAULT 'apply';
 COMMENT ON COLUMN public.applications.type IS 'Indique si c''est l''étudiant qui a postulé (apply) ou l''entreprise qui a invité (invite)';
+
+-- Ajout de métadonnées aux messages pour les invitations interactives
+ALTER TABLE public.messages
+ADD COLUMN IF NOT EXISTS metadata JSONB DEFAULT '{}'::jsonb;
+COMMENT ON COLUMN public.messages.metadata IS 'Stocke des informations techniques (ex: offer_id) pour rendre les messages interactifs';
