@@ -335,27 +335,27 @@ const SearchScreen = () => {
         {/* Modal Secteur */}
         <Modal visible={isSectorModalVisible} transparent animationType="fade">
           <View style={styles.modalBg}>
-            <View style={styles.modalContainer}>
-              <Text style={[styles.modalTitle, { fontSize: scaledSize(18) }]}>Sélectionner un secteur</Text>
+            <View style={[styles.modalContainer, { backgroundColor: colors.secondary || colors.background, borderColor: colors.glassBorder }]}>
+              <Text style={[styles.modalTitle, { fontSize: scaledSize(18), color: colors.text }]}>Sélectionner un secteur</Text>
               <ScrollView style={{ maxHeight: '80%' }}>
                 {sectorItems.map(sector => (
                   <TouchableOpacity
                     key={sector.key}
-                    style={[styles.modalItem, sectorFilter === sector.key && styles.modalItemActive]}
+                    style={[styles.modalItem, { borderBottomColor: colors.glassBorder }, sectorFilter === sector.key && [styles.modalItemActive, { backgroundColor: `${colors.accent}15` }]]}
                     onPress={() => {
                       setSectorFilter(sector.key);
                       setIsSectorModalVisible(false);
                     }}
                   >
-                    <Text style={[styles.modalItemText, sectorFilter === sector.key && styles.modalItemTextActive]}>
+                    <Text style={[styles.modalItemText, { color: colors.text }, sectorFilter === sector.key && styles.modalItemTextActive]}>
                       {sector.label}
                     </Text>
                     {sectorFilter === sector.key && <Feather name="check" size={20} color={colors.accent} />}
                   </TouchableOpacity>
                 ))}
               </ScrollView>
-              <TouchableOpacity style={styles.modalCloseBtn} onPress={() => setIsSectorModalVisible(false)}>
-                <Text style={styles.modalCloseText}>Fermer</Text>
+              <TouchableOpacity style={[styles.modalCloseBtn, { backgroundColor: isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(120,120,120,0.1)' }]} onPress={() => setIsSectorModalVisible(false)}>
+                <Text style={[styles.modalCloseText, { color: colors.text }]}>Fermer</Text>
               </TouchableOpacity>
             </View>
           </View>
