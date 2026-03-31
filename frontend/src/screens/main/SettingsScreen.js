@@ -119,11 +119,11 @@ const SettingsScreen = () => {
         {userRole === 'student' && (
           <>
             <Text style={[styles.sectionTitle, { fontSize: scaledSize(12), color: colors.textSecondary }]}>CV</Text>
-            <View style={styles.group}>
+            <View style={[styles.group, { backgroundColor: colors.glassBackground, borderColor: colors.glassBorder }]}>
               {profile?.cv_url ? (
                 <>
                   {/* CV file info */}
-                  <View style={[styles.item, styles.itemBorder]}>
+                  <View style={[styles.item, styles.itemBorder, { borderBottomColor: colors.glassBorder }]}>
                     <View style={[styles.itemIcon, { backgroundColor: `${colors.success}20` }]}>
                       <Feather name="check-circle" size={18} color={colors.success} />
                     </View>
@@ -139,7 +139,7 @@ const SettingsScreen = () => {
 
                   {/* Open CV */}
                   <TouchableOpacity
-                    style={[styles.item, styles.itemBorder]}
+                    style={[styles.item, styles.itemBorder, { borderBottomColor: colors.glassBorder }]}
                     onPress={handleViewCV}
                     accessibilityRole="button"
                     accessibilityLabel={t('downloadCV')}
@@ -155,7 +155,7 @@ const SettingsScreen = () => {
 
                   {/* Update CV */}
                   <TouchableOpacity
-                    style={[styles.item, styles.itemBorder]}
+                    style={[styles.item, styles.itemBorder, { borderBottomColor: colors.glassBorder }]}
                     onPress={handleUploadCV}
                     disabled={uploading}
                     accessibilityRole="button"
