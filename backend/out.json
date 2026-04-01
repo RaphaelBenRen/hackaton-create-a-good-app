@@ -1,6 +1,0 @@
-{
-  "students": "Could not find a relationship between 'applications' and 'students' in the schema cache",
-  "users": "Could not find a relationship between 'applications' and 'users' in the schema cache",
-  "profiles": "Could not find a relationship between 'applications' and 'profiles' in the schema cache",
-  "public_students": "Could not find a relationship between 'applications' and 'students' in the schema cache"
-}

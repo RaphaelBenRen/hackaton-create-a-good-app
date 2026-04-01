@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(tasklist /FI \"PID eq 18008\")",
-      "Bash(wmic process:*)"
-    ]
-  }
-}
