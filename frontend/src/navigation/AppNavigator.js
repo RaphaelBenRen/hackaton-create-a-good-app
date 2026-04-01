@@ -179,19 +179,7 @@ const AppNavigator = () => {
         }} />
       </Modal>
 
-      {/* Bouton de debug temporaire pour forcer l'onboarding ( visible uniquement en dev ) */}
-      {session && profile && onboardingDone === true && (
-        <TouchableOpacity 
-          style={{ position: 'absolute', top: 50, right: 20, padding: 5, backgroundColor: 'rgba(255,0,0,0.3)', borderRadius: 10 }}
-          onPress={async () => {
-          const storageKey = `onboardingSeen_${profile?.id || 'guest'}`;
-          await AsyncStorage.removeItem(storageKey);
-            setOnboardingDone(false);
-          }}
-        >
-          <Text style={{ color: '#fff', fontSize: 10 }}>Reset Onboarding</Text>
-        </TouchableOpacity>
-      )}
+
     </View>
   );
 };
